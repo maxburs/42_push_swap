@@ -17,8 +17,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-
 int		get_instructions(char ***instr_return)
 {
 	char	buff[BUFF_SIZE];
@@ -40,5 +38,7 @@ int		get_instructions(char ***instr_return)
 	instr_raw = ft_lstr_finish(&l);
 	*instr_return = ft_strsplit(instr_raw, ' ');
 	free(instr_raw);
+	if (g_flags & FLAG_VERBOSE)
+		print_instructions(*instr_return);
 	return (0);
 }

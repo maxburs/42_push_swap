@@ -12,7 +12,11 @@ CHECKER_SRC = \
 		execute_instructions.c \
 		get_instructions.c \
 		solve_check.c \
-	)
+		free.c \
+		$(addprefix instructions/, \
+			sa.c \
+		) \
+	) \
 
 CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 

@@ -26,7 +26,20 @@ int		execute_instructions(t_list **a, t_list **b, char **instr);
 int		solve_check(t_list *a, t_list *b);
 int		get_instructions(char ***instr_return);
 
+/*
+** free.c
+*/
+void	free_instructions(char ***instr);
+void	free_stack(t_list **stack);
 
+/*
+** ./instructions/
+*/
+int		exec_sa(t_list **a, t_list **b);
+
+/*
+** verbose.c (-v)
+*/
 void	print_stack(t_list *stack);
 void	print_instructions(char **instr);
 

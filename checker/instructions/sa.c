@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solve_check.c                                      :+:      :+:    :+:   */
+/*   sa.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/29 23:47:08 by mburson           #+#    #+#             */
-/*   Updated: 2017/01/29 23:47:10 by mburson          ###   ########.fr       */
+/*   Created: 2017/01/31 04:40:20 by mburson           #+#    #+#             */
+/*   Updated: 2017/01/31 04:40:21 by mburson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int		solve_check(t_list *a, t_list *b)
-{
-	int		last;
+#include <checker.h>
 
-	if (b)
-		return (0);
-	if (!a)
-		return (1);
-	last = *(int*)(a->content);
-	a = a->next;
-	while (a)
-	{
-		if (last > *(int*)(a->content))
-			return (0);
-		a = a->next;
-	}
-	return (1);
+int		exec_sa(t_list **a, t_list **b)
+{
+	ft_putstr("a: ");
+	print_stack(*a);
+	ft_putstr("b: ");
+	print_stack(*b);
+	return (0);
 }

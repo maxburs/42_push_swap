@@ -18,12 +18,6 @@
 
 int		g_flags;
 
-void	del_num(void *ptr, size_t size)
-{
-	size++;
-	free(ptr);
-}
-
 int		main(int argc, char **argv)
 {
 	t_list	*a;
@@ -38,19 +32,14 @@ int		main(int argc, char **argv)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	if (g_flags & FLAG_VERBOSE)
-		print_stack(a);
 	get_instructions(&instr);
-	if (g_flags & FLAG_VERBOSE)
-		print_instructions(instr);
-	//execute_instructions(a, b, instr);
+	execute_instructions(&a, &b, instr);
 	if (solve_check(a, b))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-	if (a)
-		ft_lstdel(&a, &del_num);
-	if (b)
-		ft_lstdel(&b, &del_num);
+	free_stack(&a);
+	free_stack(&b);
+	free_instructions(&instr);
 	return (0);
 }

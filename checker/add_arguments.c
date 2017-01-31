@@ -47,7 +47,7 @@ static int		parse_arg(char *arg, int *response)
 ** not including the zero-ith argument, the filename
 */
 
-int				add_arguments(int argc, char **argv, t_list **a)
+int				add_arguments(int argc, char **argv, t_list **stack)
 {
 	int		argument;
 
@@ -61,8 +61,10 @@ int				add_arguments(int argc, char **argv, t_list **a)
 		{
 			if (parse_arg(argv[argc], &argument))
 				return (1);
-			ft_lstadd(a, ft_lstnew(&argument, sizeof(int)));
+			ft_lstadd(stack, ft_lstnew(&argument, sizeof(int)));
 		}
 	}
+	if (g_flags & FLAG_VERBOSE)
+		print_stack(*stack);
 	return (0);
 }
