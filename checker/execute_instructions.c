@@ -10,4 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libft.h>
 
+int		execute_instructions(t_list **a, t_list **b, char **instr);

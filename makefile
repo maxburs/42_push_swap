@@ -8,14 +8,17 @@ CHECKER_SRC = \
 	$(addprefix ./checker/, \
 		add_arguments.c \
 		checker.c \
-		debug.c \
+		verbose.c \
 		execute_instructions.c \
+		get_instructions.c \
 		solve_check.c \
 	)
 
 CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 
 HEADERS = -I ./checker -I ./push_swap -I ./libft
+
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(CHECKER) $(PUSH_SWAP)
 
@@ -39,4 +42,4 @@ fclean: clean
 	rm -f $(CHECKER) $(PUSH_SWAP)
 re: fclean all
 
-.PHONY: all clean fclean ./libft/libft.a
+.PHONY: all clean fclean $(LIBFT)
