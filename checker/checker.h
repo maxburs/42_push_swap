@@ -40,7 +40,8 @@ int		exec_sa(t_list **a, t_list **b);
 /*
 ** verbose.c (-v)
 */
-void	print_stack(t_list *stack);
+void	print_starting_stack(t_list *stack);
 void	print_instructions(char **instr);
+void	print_stacks(t_list *a, t_list *b);
 
 #endif

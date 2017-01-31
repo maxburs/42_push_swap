@@ -16,9 +16,14 @@
 
 int		exec_sa(t_list **a, t_list **b)
 {
-	ft_putstr("a: ");
-	print_stack(*a);
-	ft_putstr("b: ");
-	print_stack(*b);
+	t_list	*swap;
+
+	if (!*a || !(*a)->next)
+		return (0);
+	swap = *a;
+	*a = (*a)->next;
+	swap->next = (*a)->next;
+	(*a)->next = swap;
+	print_stacks(*a, *b);
 	return (0);
 }

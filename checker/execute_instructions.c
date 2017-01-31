@@ -48,6 +48,8 @@ int		execute_instructions(t_list **a, t_list **b, char **instr)
 {
 	int		i;
 
+	if (g_flags & FLAG_VERBOSE)
+		ft_putchar('\n');
 	while (*instr)
 	{
 		i = 0;

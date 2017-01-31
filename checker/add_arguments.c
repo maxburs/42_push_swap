@@ -65,6 +65,6 @@ int				add_arguments(int argc, char **argv, t_list **stack)
 		}
 	}
 	if (g_flags & FLAG_VERBOSE)
-		print_stack(*stack);
+		print_starting_stack(*stack);
 	return (0);
 }

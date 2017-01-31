@@ -24,7 +24,6 @@ void			free_instructions(char ***instr)
 		free((*instr)[i]);
 		i++;
 	}
-	ft_putstr("test\n");
 	free(*instr);
 	*instr = NULL;
 }

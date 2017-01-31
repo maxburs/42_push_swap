@@ -12,9 +12,8 @@
 
 #include <libft.h>
 
-void	print_stack(t_list *stack)
+static void		print_stack(t_list *stack)
 {
-	ft_putstr("starting stack: ");
 	while (stack)
 	{
 		ft_putnbr(*(int*)(stack->content));
@@ -23,6 +22,21 @@ void	print_stack(t_list *stack)
 			ft_putstr(", ");
 	}
 	ft_putchar('\n');
+}
+
+void			print_stacks(t_list *a, t_list *b)
+{
+	ft_putstr("a: ");
+	print_stack(a);
+	ft_putstr("b: ");
+	print_stack(b);
+	ft_putchar('\n');
+}
+
+void	print_starting_stack(t_list *stack)
+{
+	ft_putstr("starting stack: ");
+	print_stack(stack);
 }
 
 void	print_instructions(char **instr)
