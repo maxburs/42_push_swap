@@ -27,13 +27,13 @@ int		main(int argc, char **argv)
 	g_flags = 0;
 	a = NULL;
 	b = NULL;
-	if (add_arguments(argc, argv, &a))
+	if (add_arguments(argc, argv, &a)
+		|| get_instructions(&instr)
+		|| execute_instructions(&a, &b, instr))
 	{
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	get_instructions(&instr);
-	execute_instructions(&a, &b, instr);
 	if (solve_check(a, b))
 		write(1, "OK\n", 3);
 	else

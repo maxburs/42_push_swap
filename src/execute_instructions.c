@@ -29,7 +29,7 @@ const char * const 		g_instr[] = {
 	NULL
 };
 
-static int (* const		g_func[])(t_list **a, t_list **b) = {
+int (* const			g_func[])(t_list **a, t_list **b) = {
 	&exec_sa,
 	&exec_sb,
 	&exec_ss,

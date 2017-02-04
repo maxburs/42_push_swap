@@ -21,11 +21,14 @@
 
 #define UNUSED(x) (void)(x)
 
-extern int	g_flags;
+extern int					g_flags;
+extern const char * const 	g_instr[];
+extern int (* const			g_func[])(t_list **a, t_list **b);
 
 int		execute_instructions(t_list **a, t_list **b, char **instr);
 int		solve_check(t_list *a, t_list *b);
 int		get_instructions(char ***instr_return);
+int		solve(t_list **instr, t_list **a, t_list **b);
 
 /*
 ** add_arguments.c

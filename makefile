@@ -19,7 +19,7 @@ CHECKER_SRC = \
 			instr_ra_rb_rr.c \
 			instr_rra_rrb_rrr.c \
 		) \
-	) \
+	)
 
 CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 
@@ -29,6 +29,14 @@ PUSH_SWAP_SRC = \
 		verbose.c \
 		add_arguments.c \
 		free.c \
+		execute_instructions.c \
+		solve.c \
+		$(addprefix instructions/, \
+			instr_sa_sb_ss.c \
+			instr_pa_pb.c \
+			instr_ra_rb_rr.c \
+			instr_rra_rrb_rrr.c \
+		) \
 	)
 
 PUSH_SWAP_OBJ = $(PUSH_SWAP_SRC:.c=.o)
