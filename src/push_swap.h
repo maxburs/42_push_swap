@@ -23,10 +23,14 @@
 
 extern int	g_flags;
 
-int		add_arguments(int argc, char **argv, t_list **a);
 int		execute_instructions(t_list **a, t_list **b, char **instr);
 int		solve_check(t_list *a, t_list *b);
 int		get_instructions(char ***instr_return);
+
+/*
+** add_arguments.c
+*/
+int		add_arguments(int argc, char **argv, t_list **a);
 
 /*
 ** free.c

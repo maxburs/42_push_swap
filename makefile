@@ -21,8 +21,17 @@ CHECKER_SRC = \
 		) \
 	) \
 
-
 CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
+
+PUSH_SWAP_SRC = \
+	$(addprefix ./src/, \
+		push_swap.c \
+		verbose.c \
+		add_arguments.c \
+		free.c \
+	)
+
+PUSH_SWAP_OBJ = $(PUSH_SWAP_SRC:.c=.o)
 
 HEADERS = -I ./src -I ./libft
 
@@ -33,8 +42,8 @@ all: $(CHECKER) $(PUSH_SWAP)
 $(CHECKER): $(LIBFT) $(CHECKER_OBJ)
 	gcc $(CFLAGS) -o $@ $^
 
-$(PUSH_SWAP): $(LIBFT)
-	@echo "no push_swap yet :("
+$(PUSH_SWAP): $(LIBFT) $(PUSH_SWAP_OBJ)
+	gcc $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
@@ -44,7 +53,7 @@ $(LIBFT):
 	cd ./libft && $(MAKE)
 
 clean:
-	rm -f $(CHECKER_OBJ)
+	rm -f $(CHECKER_OBJ) $(PUSH_SWAP_OBJ)
 	cd ./libft && $(MAKE) fclean
 fclean: clean
 	rm -f $(CHECKER) $(PUSH_SWAP)

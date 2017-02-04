@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	b = NULL;
 	if (add_arguments(argc, argv, &a))
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (0);
 	}
 	get_instructions(&instr);
