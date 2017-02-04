@@ -1,6 +1,6 @@
-CHECKER = checker.out
+CHECKER = checker
 
-PUSH_SWAP = push_swap.out
+PUSH_SWAP = push_swap
 
 LIBFT = ./libft/libft.a
 
@@ -30,7 +30,10 @@ PUSH_SWAP_SRC = \
 		add_arguments.c \
 		free.c \
 		execute_instructions.c \
-		solve.c \
+		$(addprefix solve/, \
+			solve.c \
+			state.c \
+		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \
 			instr_pa_pb.c \

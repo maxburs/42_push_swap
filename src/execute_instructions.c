@@ -44,14 +44,6 @@ int (* const			g_func[])(t_list **a, t_list **b) = {
 	NULL
 };
 
-static void		print_instr_res(t_list **a, t_list **b, char *instr)
-{
-	ft_putstr("operation: ");
-	ft_putstr(instr);
-	ft_putstr("\n");
-	print_stacks(*a, *b);
-}
-
 int				execute_instructions(t_list **a, t_list **b, char **instr)
 {
 	int		i;
@@ -71,6 +63,12 @@ int				execute_instructions(t_list **a, t_list **b, char **instr)
 				break ;
 			}
 			i++;
+			if (g_flags & FLAG_VERBOSE && !g_instr[i])
+			{
+				ft_putstr_fd("invalid operation: ->", 2);
+				ft_putstr_fd(*instr, 2);
+				ft_putstr_fd("<-\n", 2);
+			}
 		}
 		instr++;
 	}

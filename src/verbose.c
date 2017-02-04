@@ -43,7 +43,7 @@ void	print_instructions(char **instr)
 {
 	int 	i;
 
-	ft_putstr("instructions: ");
+	ft_putstr("operations: ");
 	i = 0;
 	while (instr[i])
 	{
@@ -53,4 +53,12 @@ void	print_instructions(char **instr)
 			ft_putstr(", ");
 	}
 	ft_putchar('\n');
+}
+
+void			print_instr_res(t_list **a, t_list **b, char const *instr)
+{
+	ft_putstr("operation: ");
+	ft_putstr(instr);
+	ft_putstr("\n");
+	print_stacks(*a, *b);
 }

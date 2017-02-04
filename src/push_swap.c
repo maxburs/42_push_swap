@@ -29,10 +29,8 @@ int		print_lst_instr(t_list *instr)
 			return (1);
 		}
 		instr = instr->next;
-		if (instr)
-			ft_putchar(' ');
+		ft_putchar('\n');
 	}
-	ft_putchar('\n');
 	return (0);
 }
 

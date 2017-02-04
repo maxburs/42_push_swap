@@ -27,16 +27,10 @@ int		get_instructions(char ***instr_return)
 	l = NULL;
 	while ((res = read(0, buff, BUFF_SIZE)))
 	{
-		if (buff[res - 1] == '\n')
-		{
-			buff[res - 1] = ' ';
-			ft_lstr_add(&l, ft_strndup(buff, res), false);
-			break ;
-		}
 		ft_lstr_add(&l, ft_strndup(buff, res), false);
 	}
 	instr_raw = ft_lstr_finish(&l);
-	*instr_return = ft_strsplit(instr_raw, ' ');
+	*instr_return = ft_strsplit(instr_raw, '\n');
 	free(instr_raw);
 	if (g_flags & FLAG_VERBOSE)
 		print_instructions(*instr_return);
