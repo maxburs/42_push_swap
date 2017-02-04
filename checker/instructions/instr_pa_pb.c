@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa.c                                               :+:      :+:    :+:   */
+/*   instr_pa_pb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/31 04:40:20 by mburson           #+#    #+#             */
-/*   Updated: 2017/01/31 04:40:21 by mburson          ###   ########.fr       */
+/*   Created: 2017/02/03 15:16:58 by mburson           #+#    #+#             */
+/*   Updated: 2017/02/03 15:17:00 by mburson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-
 #include <checker.h>
 
-int		exec_sa(t_list **a, t_list **b)
+static int		lst_movetop(t_list **from, t_list **to)
 {
 	t_list	*swap;
 
-	if (!*a || !(*a)->next)
+	if (!*from)
 		return (0);
-	swap = *a;
-	*a = (*a)->next;
-	swap->next = (*a)->next;
-	(*a)->next = swap;
-	print_stacks(*a, *b);
+	swap = *from;
+	*from = (*from)->next;
+	swap->next = *to;
+	*to = swap;
 	return (0);
+}
+
+int		exec_pa(t_list **a, t_list **b)
+{
+	return (lst_movetop(b, a));
+}
+
+int		exec_pb(t_list **a, t_list **b)
+{
+	return (lst_movetop(a, b));
 }

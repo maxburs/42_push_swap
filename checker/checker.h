@@ -19,6 +19,8 @@
 
 # define FLAG_VERBOSE 0x1
 
+#define UNUSED(x) (void)(x)
+
 extern int	g_flags;
 
 int		add_arguments(int argc, char **argv, t_list **a);
@@ -36,6 +38,16 @@ void	free_stack(t_list **stack);
 ** ./instructions/
 */
 int		exec_sa(t_list **a, t_list **b);
+int		exec_sb(t_list **a, t_list **b);
+int		exec_ss(t_list **a, t_list **b);
+int		exec_pa(t_list **a, t_list **b);
+int		exec_pb(t_list **a, t_list **b);
+int		exec_ra(t_list **a, t_list **b);
+int		exec_rb(t_list **a, t_list **b);
+int		exec_rr(t_list **a, t_list **b);
+int		exec_rra(t_list **a, t_list **b);
+int		exec_rrb(t_list **a, t_list **b);
+int		exec_rrr(t_list **a, t_list **b);
 
 /*
 ** verbose.c (-v)

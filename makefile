@@ -14,7 +14,10 @@ CHECKER_SRC = \
 		solve_check.c \
 		free.c \
 		$(addprefix instructions/, \
-			sa.c \
+			instr_sa_sb_ss.c \
+			instr_pa_pb.c \
+			instr_ra_rb_rr.c \
+			instr_rra_rrb_rrr.c \
 		) \
 	) \
 

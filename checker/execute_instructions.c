@@ -16,35 +16,43 @@
 
 const char * const 		g_instr[] = {
 	"sa",
-//	"sb",
-//	"ss",
-//	"pa",
-//	"pb",
-//	"ra",
-//	"rb",
-//	"rr",
-//	"rra",
-//	"rrb",
-//	"rrr",
+	"sb",
+	"ss",
+	"pa",
+	"pb",
+	"ra",
+	"rb",
+	"rr",
+	"rra",
+	"rrb",
+	"rrr",
 	NULL
 };
 
-static int (* const		func[])(t_list **a, t_list **b) = {
+static int (* const		g_func[])(t_list **a, t_list **b) = {
 	&exec_sa,
-//	&exec_sb,
-//	&exec_ss,
-//	&exec_pa,
-//	&exec_pb,
-//	&exec_ra,
-//	&exec_rb,
-//	&exec_rr,
-//	&exec_rra,
-//	&exec_rrb,
-//	&exec_rrr,
+	&exec_sb,
+	&exec_ss,
+	&exec_pa,
+	&exec_pb,
+	&exec_ra,
+	&exec_rb,
+	&exec_rr,
+	&exec_rra,
+	&exec_rrb,
+	&exec_rrr,
 	NULL
 };
 
-int		execute_instructions(t_list **a, t_list **b, char **instr)
+static void		print_instr_res(t_list **a, t_list **b, char *instr)
+{
+	ft_putstr("operation: ");
+	ft_putstr(instr);
+	ft_putstr("\n");
+	print_stacks(*a, *b);
+}
+
+int				execute_instructions(t_list **a, t_list **b, char **instr)
 {
 	int		i;
 
@@ -57,7 +65,9 @@ int		execute_instructions(t_list **a, t_list **b, char **instr)
 		{
 			if (ft_strequ(*instr, g_instr[i]))
 			{
-				(*func[i])(a, b);
+				(*g_func[i])(a, b);
+				if (g_flags & FLAG_VERBOSE)
+					print_instr_res(a, b, *instr);
 				break ;
 			}
 			i++;
