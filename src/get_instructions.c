@@ -13,7 +13,7 @@
 #include <libft.h>
 #include <unistd.h>
 #include <string.h>
-#include <checker.h>
+#include <push_swap.h>
 #include <stdbool.h>
 #include <stdlib.h>
 

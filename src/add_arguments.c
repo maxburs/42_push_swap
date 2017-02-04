@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <checker.h>
+#include <push_swap.h>
 
 static int		parse_arg(char *arg, int *response)
 {

@@ -5,7 +5,7 @@ PUSH_SWAP = push_swap.out
 LIBFT = ./libft/libft.a
 
 CHECKER_SRC = \
-	$(addprefix ./checker/, \
+	$(addprefix ./src/, \
 		add_arguments.c \
 		checker.c \
 		verbose.c \
@@ -21,9 +21,10 @@ CHECKER_SRC = \
 		) \
 	) \
 
+
 CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 
-HEADERS = -I ./checker -I ./push_swap -I ./libft
+HEADERS = -I ./src -I ./libft
 
 CFLAGS = -Wall -Wextra -Werror
 

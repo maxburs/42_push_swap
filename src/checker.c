@@ -12,7 +12,7 @@
 
 #include <string.h>
 #include <libft.h>
-#include <checker.h>
+#include <push_swap.h>
 #include <unistd.h>
 #include <stdlib.h>
 

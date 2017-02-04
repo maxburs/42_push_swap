@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <checker.h>
+#include <push_swap.h>
 
 static int		lst_movetop(t_list **from, t_list **to)
 {

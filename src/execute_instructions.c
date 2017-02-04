@@ -12,7 +12,7 @@
 
 #include <libft.h>
 #include <string.h>
-#include <checker.h>
+#include <push_swap.h>
 
 const char * const 		g_instr[] = {
 	"sa",
