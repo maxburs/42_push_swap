@@ -12,21 +12,29 @@
 
 #include <libft.h>
 
-int		solve_check(t_list *a, t_list *b)
+int		stack_in_order(t_list *stack)
 {
 	int		last;
 
-	if (b)
-		return (0);
-	if (!a)
+	if (!stack)
 		return (1);
-	last = *(int*)(a->content);
-	a = a->next;
-	while (a)
+	last = *(int*)(stack->content);
+	stack = stack->next;
+	while (stack)
 	{
-		if (last > *(int*)(a->content))
+		if (last > *(int*)(stack->content))
 			return (0);
-		a = a->next;
+		last = *(int*)(stack->content);
+		stack = stack->next;
 	}
 	return (1);
 }
+
+
+int		solve_check(t_list *a, t_list *b)
+{
+	if (b)
+		return (0);
+	return (stack_in_order(a));
+}
+

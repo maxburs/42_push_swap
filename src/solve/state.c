@@ -32,20 +32,20 @@ int		path_to_smallest(t_list *stack)
 {
 	int		front;
 	int		back;
-	int		highscore;
+	int		smallest;
 
 	front = 0;
 	back = 0;
 	if (!stack)
 		return (0);
-	highscore = *(int*)(stack->content);
+	smallest = *(int*)(stack->content);
 	stack = stack->next;
 	while (stack)
 	{
 		back++;
-		if (*(int*)(stack->content) < highscore)
+		if (*(int*)(stack->content) < smallest)
 		{
-			highscore = *(int*)(stack->content);
+			smallest = *(int*)(stack->content);
 			front += back;
 			back = 0;
 		}
@@ -53,4 +53,21 @@ int		path_to_smallest(t_list *stack)
 	}
 	back++;
 	return (front < back ? front : -1 * back);
+}
+
+int		find_smallest(t_list *stack)
+{
+	int		smallest;
+
+	smallest = *(int*)(stack->content);
+	stack = stack->next;
+	while (stack)
+	{
+		if (*(int*)(stack->content) < smallest)
+		{
+			smallest = *(int*)(stack->content);
+		}
+		stack = stack->next;
+	}
+	return (smallest);
 }

@@ -13,6 +13,8 @@
 #include <libft.h>
 #include <push_swap.h>
 
+#include <stdio.h>
+
 static int		parse_arg(char *arg, int *response)
 {
 	int		num;
@@ -42,6 +44,30 @@ static int		parse_arg(char *arg, int *response)
 	return (0);
 }
 
+static int		add_arg_array(t_list **stack, char *argv)
+{
+	char	**split;
+	int		i;
+	int		argument;
+
+	split = ft_strsplit(argv, ' ');
+	i = 0;
+	while (split[i])
+		i++;
+	while (i)
+	{
+		i--;
+		if (parse_arg(split[i], &argument))
+		{
+			free_instructions(&split);
+			return (1);
+		}
+		ft_lstadd(stack, ft_lstnew(&argument, sizeof(int)));
+	}
+	free_instructions(&split);
+	return (0);
+}
+
 /*
 ** adds arguments in reverse order,
 ** not including the zero-ith argument, the filename
@@ -49,7 +75,6 @@ static int		parse_arg(char *arg, int *response)
 
 int				add_arguments(int argc, char **argv, t_list **stack)
 {
-	int		argument;
 
 	while (--argc)
 	{
@@ -59,12 +84,12 @@ int				add_arguments(int argc, char **argv, t_list **stack)
 		}
 		else 
 		{
-			if (parse_arg(argv[argc], &argument))
+			if (add_arg_array(stack, argv[argc]))
 				return (1);
-			ft_lstadd(stack, ft_lstnew(&argument, sizeof(int)));
 		}
 	}
 	if (g_flags & FLAG_VERBOSE)
 		print_starting_stack(*stack);
 	return (0);
 }
+

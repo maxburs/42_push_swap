@@ -30,6 +30,7 @@ PUSH_SWAP_SRC = \
 		add_arguments.c \
 		free.c \
 		execute_instructions.c \
+		solve_check.c \
 		$(addprefix solve/, \
 			solve.c \
 			state.c \

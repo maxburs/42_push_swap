@@ -12,6 +12,7 @@
 
 #include <libft.h>
 #include <push_swap.h>
+#include <stdbool.h>
 
 #include <stdio.h>
 
@@ -24,7 +25,7 @@ static int		exec_instr(t_state *state, int instr)
 		print_instr_res(state->a, state->b, g_instr[instr]);
 	return (0);
 }
-
+/*
 static int		exec_n_instr(t_state *state, int instr, int n)
 {
 	while (n)
@@ -35,24 +36,53 @@ static int		exec_n_instr(t_state *state, int instr, int n)
 	}
 	return (0);
 }
+*/
+/*
+** moves a stack to the smallest integer in it
+** bubble sorting along the way
+*/
+static int		goto_smallest_bubble(t_state *state, int is_a)
+{
+	int		path;
+	int		smallest;
+	t_list	**stack;
+	int		bubble;
+	int		move;
+
+	if (g_flags & FLAG_VERBOSE)
+		ft_putstr("   --- starting: goto_smallest_bubble ---\n\n");
+	stack = is_a ? state->a : state->b;
+	path = path_to_smallest((*stack));
+	smallest = find_smallest((*stack));
+	bubble = is_a ? SA : SB;
+	move = (path > 0) ? (is_a ? RA : RB) : (is_a ? RRA : RRB);
+	while (*(int*)((*stack)->content) != smallest)
+	{
+		if (*(int*)((*stack)->content) > *(int*)(((*stack)->next)->content))
+			exec_instr(state, bubble);
+		else
+			exec_instr(state, move);
+	}
+	if (g_flags & FLAG_VERBOSE)
+		ft_putstr("   --- ending: goto_smallest_bubble ---\n\n");
+	return (0);
+}
 
 int				solve(t_list **instr, t_list **a, t_list **b)
 {
 	t_state		state;
-	int			path;
 
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
-
 	while (*a)
 	{
-		if ((path = path_to_smallest(*a)))
+		goto_smallest_bubble(&state, true);
+		if (stack_in_order(*a))
 		{
-			if (path > 0)
-				exec_n_instr(&state, RA, path);
-			else
-				exec_n_instr(&state, RRA, path * -1);
+			if (g_flags & FLAG_VERBOSE)
+				ft_putstr("   --- stack 'a' in order, finalizing... ---\n\n");
+			break ;
 		}
 		exec_instr(&state, PB);
 	}
