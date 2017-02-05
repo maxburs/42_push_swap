@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <libft.h>
 
@@ -47,66 +47,70 @@
 # define RRR 10
 
 
-typedef struct	s_state
+typedef struct				s_state
 {
 	t_list	**instr;
 	t_list	**a;
 	t_list	**b;
-}				t_state;
+}							t_state;
 
 extern int					g_flags;
-extern const char * const 	g_instr[];
+extern char const (* const 	g_instr[]);
 extern int (* const			g_func[])(t_list **a, t_list **b);
 
-int		execute_instructions(t_list **a, t_list **b, char **instr);
-int		get_instructions(char ***instr_return);
+int							execute_instructions(t_list **a, t_list **b, char **instr);
+int							get_instructions(char ***instr_return);
 
 /*
 ** solve_check.c
 */
-int		solve_check(t_list *a, t_list *b);
-int		stack_in_order(t_list *stack);
+int							solve_check(t_list *a, t_list *b);
+int							stack_in_order(t_list *stack);
 
 /*
 ** add_arguments.c
 */
-int		add_arguments(int argc, char **argv, t_list **a);
+int							add_arguments(int argc, char **argv, t_list **a);
 
 /*
 ** /solve/
 */
-int		solve(t_list **instr, t_list **a, t_list **b);
-int		path_to_smallest(t_list *stack);
-int		find_smallest(t_list *stack);
-int		find_biggest(t_list *stack);
+int							solve(t_list **instr, t_list **a, t_list **b);
+int							path_to_smallest(t_list *stack);
+int							find_smallest(t_list *stack);
+int							find_biggest(t_list *stack);
+t_list						*find_n_smallest(t_list *stack, int n);
+int							nth_smallest(t_list *stack, int n);
+int							lst_is_order(t_list *stack, int smallest);
 
 /*
 ** free.c
 */
-void	free_instructions(char ***instr);
-void	free_stack(t_list **stack);
+void						free_instructions(char ***instr);
+void						free_stack(t_list **stack);
 
 /*
 ** ./instructions/
 */
-int		exec_sa(t_list **a, t_list **b);
-int		exec_sb(t_list **a, t_list **b);
-int		exec_ss(t_list **a, t_list **b);
-int		exec_pa(t_list **a, t_list **b);
-int		exec_pb(t_list **a, t_list **b);
-int		exec_ra(t_list **a, t_list **b);
-int		exec_rb(t_list **a, t_list **b);
-int		exec_rr(t_list **a, t_list **b);
-int		exec_rra(t_list **a, t_list **b);
-int		exec_rrb(t_list **a, t_list **b);
-int		exec_rrr(t_list **a, t_list **b);
+int							exec_sa(t_list **a, t_list **b);
+int							exec_sb(t_list **a, t_list **b);
+int							exec_ss(t_list **a, t_list **b);
+int							exec_pa(t_list **a, t_list **b);
+int							exec_pb(t_list **a, t_list **b);
+int							exec_ra(t_list **a, t_list **b);
+int							exec_rb(t_list **a, t_list **b);
+int							exec_rr(t_list **a, t_list **b);
+int							exec_rra(t_list **a, t_list **b);
+int							exec_rrb(t_list **a, t_list **b);
+int							exec_rrr(t_list **a, t_list **b);
 
 /*
 ** verbose.c (-v)
 */
-void	print_starting_stack(t_list *stack);
-void	print_instructions(char **instr);
-void	print_stacks(t_list *a, t_list *b);
-void	print_instr_res(t_list **a, t_list **b, char const *instr);
+void						print_starting_stack(t_list *stack);
+void						print_instructions(char **instr);
+void						print_stacks(t_list *a, t_list *b);
+void						print_instr_res(t_list **a, t_list **b, char const *instr);
+void						print_stack(t_list *stack);
 
 #endif

@@ -30,7 +30,6 @@ int		stack_in_order(t_list *stack)
 	return (1);
 }
 
-
 int		solve_check(t_list *a, t_list *b)
 {
 	if (b)

@@ -25,22 +25,25 @@ static int		exec_instr(t_state *state, int instr)
 		print_instr_res(state->a, state->b, g_instr[instr]);
 	return (0);
 }
+
 /*
-static int		exec_n_instr(t_state *state, int instr, int n)
-{
-	while (n)
-	{
-		if (exec_instr(state, instr))
-			return (1);
-		n--;
-	}
-	return (0);
-}
+**static int		exec_n_instr(t_state *state, int instr, int n)
+**{
+**	while (n)
+**	{
+**		if (exec_instr(state, instr))
+**			return (1);
+**		n--;
+**	}
+**	return (0);
+**}
 */
+
 /*
 ** moves a stack to the smallest integer in it
 ** bubble sorting along the way
 */
+
 static int		goto_smallest_bubble(t_state *state, int is_a)
 {
 	int		path;
@@ -51,7 +54,7 @@ static int		goto_smallest_bubble(t_state *state, int is_a)
 	int		biggest;
 
 	if (g_flags & FLAG_VERBOSE)
-		ft_putstr("   --- starting: goto_smallest_bubble ---\n\n");
+		ft_putstr("   --- starting: goto_smallest_bubble\n\n");
 	stack = is_a ? state->a : state->b;
 	path = path_to_smallest(*stack);
 	smallest = find_smallest(*stack);
@@ -68,7 +71,7 @@ static int		goto_smallest_bubble(t_state *state, int is_a)
 			exec_instr(state, move);
 	}
 	if (g_flags & FLAG_VERBOSE)
-		ft_putstr("   --- ending: goto_smallest_bubble ---\n\n");
+		ft_putstr("   --- ending: goto_smallest_bubble\n\n");
 	return (0);
 }
 
@@ -79,13 +82,19 @@ int				solve(t_list **instr, t_list **a, t_list **b)
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
+
+	int		smallest = lst_is_order(*a, find_smallest(*a));
+	ft_putstr("ls_is_order: ");
+	ft_putnbr(smallest);
+	ft_putchar('\n');
+
 	while (*a)
 	{
 		goto_smallest_bubble(&state, true);
 		if (stack_in_order(*a))
 		{
 			if (g_flags & FLAG_VERBOSE)
-				ft_putstr("   --- stack 'a' in order, finalizing... ---\n\n");
+				ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
 			break ;
 		}
 		exec_instr(&state, PB);

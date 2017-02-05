@@ -12,22 +12,11 @@
 
 #include <libft.h>
 
-#include <stdio.h>
-
-/*
-** checks to see if the stack only needs rotating to be in order
-*/
-/*
-int		stack_r_order(t_list **stack)
-{
-	
-}
-*/
-
 /*
 ** returns the number of rotate to get to the smallest int
 ** returns negative if its faster to rotate backwards
 */
+
 int		path_to_smallest(t_list *stack)
 {
 	int		front;
@@ -87,4 +76,35 @@ int		find_biggest(t_list *stack)
 		stack = stack->next;
 	}
 	return (biggest);
+}
+
+/*
+** returns true of spinning the list to the first element will put it in order
+*/
+
+int		lst_is_order(t_list *stack, int smallest)
+{
+	int		found_smallest;
+	int		last;
+	int		first;
+
+	found_smallest = 0;
+	last = *(int*)(stack->content);
+	first = last;
+	if (last == smallest)
+		found_smallest = 1;
+	stack = stack->next;
+	while (stack)
+	{
+		if (last > *(int*)(stack->content)
+			&& (found_smallest || *(int*)(stack->content) != smallest))
+			return (0);
+		last = *(int*)(stack->content);
+		if (last == smallest)
+			found_smallest = 1;
+		stack = stack->next;
+	}
+	if (first < last)
+		return (0);
+	return (1);
 }

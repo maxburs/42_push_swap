@@ -14,7 +14,7 @@
 #include <string.h>
 #include <push_swap.h>
 
-const char * const 		g_instr[] = {
+char const *const 		g_instr[] = {
 	"sa",
 	"sb",
 	"ss",
@@ -29,7 +29,7 @@ const char * const 		g_instr[] = {
 	NULL
 };
 
-int (* const			g_func[])(t_list **a, t_list **b) = {
+int (*const			g_func[])(t_list **a, t_list **b) = {
 	&exec_sa,
 	&exec_sb,
 	&exec_ss,

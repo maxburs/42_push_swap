@@ -12,7 +12,7 @@
 
 #include <libft.h>
 
-static void		print_stack(t_list *stack)
+void			print_stack(t_list *stack)
 {
 	while (stack)
 	{
@@ -33,13 +33,13 @@ void			print_stacks(t_list *a, t_list *b)
 	ft_putchar('\n');
 }
 
-void	print_starting_stack(t_list *stack)
+void			print_starting_stack(t_list *stack)
 {
 	ft_putstr("starting stack: ");
 	print_stack(stack);
 }
 
-void	print_instructions(char **instr)
+void			print_instructions(char **instr)
 {
 	int 	i;
 

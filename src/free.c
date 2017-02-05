@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <libft.h>
+#include <push_swap.h>
 
 void			free_instructions(char ***instr)
 {
@@ -30,12 +31,18 @@ void			free_instructions(char ***instr)
 
 static void		del_num(void *ptr, size_t size)
 {
-	size++;
+	UNUSED(size);
 	free(ptr);
 }
 
 void			free_stack(t_list **stack)
 {
-	if (*stack)
+	if (stack && *stack)
 		ft_lstdel(stack, &del_num);
+}
+
+void			free_stack_one(t_list **stack)
+{
+	if (stack && *stack)
+		ft_lstdelone(stack, &del_num);
 }

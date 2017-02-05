@@ -34,6 +34,7 @@ PUSH_SWAP_SRC = \
 		$(addprefix solve/, \
 			solve.c \
 			state.c \
+			find_n_smallest.c \
 		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \

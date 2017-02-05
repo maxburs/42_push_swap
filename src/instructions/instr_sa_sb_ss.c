@@ -26,19 +26,19 @@ static int	lst_swaptop(t_list **list)
 	return (0);
 }
 
-int		exec_sa(t_list **a, t_list **b)
+int			exec_sa(t_list **a, t_list **b)
 {
 	UNUSED(b);
 	return (lst_swaptop(a));
 }
 
-int		exec_sb(t_list **a, t_list **b)
+int			exec_sb(t_list **a, t_list **b)
 {
 	UNUSED(a);
 	return (lst_swaptop(b));
 }
 
-int		exec_ss(t_list **a, t_list **b)
+int			exec_ss(t_list **a, t_list **b)
 {
 	if (lst_swaptop(a))
 		return (1);

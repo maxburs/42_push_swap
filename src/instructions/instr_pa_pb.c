@@ -26,12 +26,12 @@ static int		lst_movetop(t_list **from, t_list **to)
 	return (0);
 }
 
-int		exec_pa(t_list **a, t_list **b)
+int				exec_pa(t_list **a, t_list **b)
 {
 	return (lst_movetop(b, a));
 }
 
-int		exec_pb(t_list **a, t_list **b)
+int				exec_pb(t_list **a, t_list **b)
 {
 	return (lst_movetop(a, b));
 }

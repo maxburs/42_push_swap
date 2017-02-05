@@ -37,7 +37,7 @@ static t_list	*lst_pop(t_list **list)
 ** last element becomes the first one;
 */
 
-static int	lst_rrotate(t_list **list)
+static int		lst_rrotate(t_list **list)
 {
 	t_list	*swap;
 
@@ -50,8 +50,7 @@ static int	lst_rrotate(t_list **list)
 	return (0);
 }
 
-
-int		exec_rra(t_list **a, t_list **b)
+int				exec_rra(t_list **a, t_list **b)
 {
 	UNUSED(b);
 	return (lst_rrotate(a));
@@ -63,7 +62,7 @@ int		exec_rrb(t_list **a, t_list **b)
 	return (lst_rrotate(b));
 }
 
-int		exec_rrr(t_list **a, t_list **b)
+int				exec_rrr(t_list **a, t_list **b)
 {
 	if (lst_rrotate(a))
 		return (1);

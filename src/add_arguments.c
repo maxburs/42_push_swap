@@ -75,14 +75,13 @@ static int		add_arg_array(t_list **stack, char *argv)
 
 int				add_arguments(int argc, char **argv, t_list **stack)
 {
-
 	while (--argc)
 	{
 		if (ft_strequ(argv[argc], "-v"))
 		{
 			g_flags += FLAG_VERBOSE;
 		}
-		else 
+		else
 		{
 			if (add_arg_array(stack, argv[argc]))
 				return (1);
