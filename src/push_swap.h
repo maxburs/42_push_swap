@@ -78,6 +78,7 @@ int		add_arguments(int argc, char **argv, t_list **a);
 int		solve(t_list **instr, t_list **a, t_list **b);
 int		path_to_smallest(t_list *stack);
 int		find_smallest(t_list *stack);
+int		find_biggest(t_list *stack);
 
 /*
 ** free.c

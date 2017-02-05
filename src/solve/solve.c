@@ -48,17 +48,21 @@ static int		goto_smallest_bubble(t_state *state, int is_a)
 	t_list	**stack;
 	int		bubble;
 	int		move;
+	int		biggest;
 
 	if (g_flags & FLAG_VERBOSE)
 		ft_putstr("   --- starting: goto_smallest_bubble ---\n\n");
 	stack = is_a ? state->a : state->b;
-	path = path_to_smallest((*stack));
-	smallest = find_smallest((*stack));
+	path = path_to_smallest(*stack);
+	smallest = find_smallest(*stack);
+	biggest = find_biggest(*stack);
 	bubble = is_a ? SA : SB;
 	move = (path > 0) ? (is_a ? RA : RB) : (is_a ? RRA : RRB);
 	while (*(int*)((*stack)->content) != smallest)
 	{
-		if (*(int*)((*stack)->content) > *(int*)(((*stack)->next)->content))
+		if (*(int*)((*stack)->content) > *(int*)(((*stack)->next)->content)
+			&& (*(int*)((*stack)->content) != biggest)
+			&& (*(int*)(((*stack)->next)->content) != smallest))
 			exec_instr(state, bubble);
 		else
 			exec_instr(state, move);

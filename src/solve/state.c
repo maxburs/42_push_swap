@@ -71,3 +71,20 @@ int		find_smallest(t_list *stack)
 	}
 	return (smallest);
 }
+
+int		find_biggest(t_list *stack)
+{
+	int		biggest;
+
+	biggest = *(int*)(stack->content);
+	stack = stack->next;
+	while (stack)
+	{
+		if (*(int*)(stack->content) > biggest)
+		{
+			biggest = *(int*)(stack->content);
+		}
+		stack = stack->next;
+	}
+	return (biggest);
+}
