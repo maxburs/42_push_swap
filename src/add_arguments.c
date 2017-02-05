@@ -92,4 +92,3 @@ int				add_arguments(int argc, char **argv, t_list **stack)
 		print_starting_stack(*stack);
 	return (0);
 }
-
