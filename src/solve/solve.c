@@ -43,7 +43,23 @@ int		try_bubble(t_state *state, int stack_type)
 {
 	if (top_of_stack(state, stack_type) > next_in_stack(state, stack_type))
 	{
-		exec_instr(state, SA);
+		if (stack_type == STACK_A)
+			exec_instr(state, SA);
+		else if (stack_type == STACK_B)
+			exec_instr(state, SB);
+		return (1);
+	}
+	return (0);
+}
+
+int		try_rbubble(t_state *state, int stack_type)
+{
+	if (top_of_stack(state, stack_type) < next_in_stack(state, stack_type))
+	{
+		if (stack_type == STACK_A)
+			exec_instr(state, SA);
+		else if (stack_type == STACK_B)
+			exec_instr(state, SB);
 		return (1);
 	}
 	return (0);
@@ -87,6 +103,7 @@ int		solve(t_list **instr, t_list **a, t_list **b)
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
-	return (hybrid_sort(&state));
-	//return (merge_sort(&state));
+	//return (hybrid_sort(&state));
+	//return (merge_sort_old(&state));
+	return (merge_sort(&state));
 }

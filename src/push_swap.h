@@ -57,6 +57,19 @@ typedef struct				s_state
 	t_list	**b;
 }							t_state;
 
+/*
+** used in merge sort
+**/
+
+typedef struct	s_meta
+{
+	int			sort_size;
+	int			total_size;
+	int			size_remaining;
+	int			chunk_left;
+	int			chunk_size;
+}				t_meta;
+
 extern int					g_flags;
 extern char const (*const 	g_instr[]);
 extern int (*const			g_func[])(t_list **a, t_list **b);
@@ -86,6 +99,7 @@ int							solve(t_list **instr, t_list **a, t_list **b);
 int							exec_instr(t_state *state, int instr);
 int							exec_n_instr(t_state *state, int instr, int n);
 int							try_bubble(t_state *state, int stack_type);
+int							try_rbubble(t_state *state, int stack_type);
 int							top_of_stack(t_state *state, int stack_type);
 int							next_in_stack(t_state *state, int stack_type);
 t_list						**stack_of_type(t_state *stack, int stack_type);
@@ -101,10 +115,12 @@ t_list						*find_n_smallest(t_list *stack, int n);
 int							lst_is_order(t_list *stack, int smallest);
 int							stack_size(t_list *stack);
 int							find_biggest_old(t_list *stack);
+int							last_in_stack(t_state *state, int stack_type);
 
 int							merge_sort(t_state *state);
 int							hybrid_sort(t_state *state);
 int							nth_smallest(t_list *stack, int n);
+int							merge_sort_old(t_state *state);
 
 /*
 ** free.c

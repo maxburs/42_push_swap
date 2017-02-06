@@ -73,7 +73,7 @@ int				find_smallest(t_state *state, int stack_type)
 	return (find_smallest_base(*stack_of_type(state, stack_type)));
 }
 
-int		find_biggest_old(t_list *stack)
+int				find_biggest_old(t_list *stack)
 {
 	int		biggest;
 
@@ -90,7 +90,7 @@ int		find_biggest_old(t_list *stack)
 	return (biggest);
 }
 
-int		find_biggest(t_state *state, int stack_type)
+int				find_biggest(t_state *state, int stack_type)
 {
 	return (find_biggest_old(*stack_of_type(state, stack_type)));
 }
@@ -150,4 +150,12 @@ t_list			*ft_lst_last(t_list *stack)
 		stack = stack->next;
 	}
 	return (stack);
+}
+
+int			last_in_stack(t_state *state, int stack_type)
+{
+	if (stack_type == STACK_A)
+		return (*(int*)((ft_lst_last(*(state->a)))->content));
+	else
+		return (*(int*)((ft_lst_last(*(state->b)))->content));
 }

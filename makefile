@@ -64,7 +64,7 @@ $(PUSH_SWAP): $(LIBFT) $(PUSH_SWAP_OBJ)
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
 
-$(LIBFT): $(LIBFT_DIR)
+$(LIBFT): $(LIBFT_DIR)**/*.c
 	@echo building libft
 	cd ./libft && $(MAKE)
 
