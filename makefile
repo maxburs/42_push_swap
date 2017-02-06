@@ -3,6 +3,7 @@ CHECKER = checker
 PUSH_SWAP = push_swap
 
 LIBFT = ./libft/libft.a
+LIBFT_DIR = ./libft/
 
 CHECKER_SRC = \
 	$(addprefix ./src/, \
@@ -63,7 +64,7 @@ $(PUSH_SWAP): $(LIBFT) $(PUSH_SWAP_OBJ)
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
 
-$(LIBFT):
+$(LIBFT): $(LIBFT_DIR)
 	@echo building libft
 	cd ./libft && $(MAKE)
 
@@ -74,4 +75,4 @@ fclean: clean
 	rm -f $(CHECKER) $(PUSH_SWAP)
 re: fclean all
 
-.PHONY: all clean fclean $(LIBFT)
+.PHONY: all clean fclean
