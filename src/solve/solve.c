@@ -23,7 +23,6 @@ int		exec_instr(t_state *state, int instr)
 	return (0);
 }
 
-
 int		exec_n_instr(t_state *state, int instr, int n)
 {
 	while (n)
@@ -35,7 +34,6 @@ int		exec_n_instr(t_state *state, int instr, int n)
 	return (0);
 }
 
-
 /*
 ** if the next to elements in the stack type are out of order swap them
 ** return 1 if a swap was made, otherwise return 0
@@ -43,21 +41,10 @@ int		exec_n_instr(t_state *state, int instr, int n)
 
 int		try_bubble(t_state *state, int stack_type)
 {
-	if (stack_type == STACK_A)
+	if (top_of_stack(state, stack_type) > next_in_stack(state, stack_type))
 	{
-		if (*(int*)((*(state->a))->content) > *(int*)(((*(state->a))->next)->content))
-		{
-			exec_instr(state, SA);
-			return (1);
-		}
-	}
-	else if (stack_type == STACK_B)
-	{
-		if (*(int*)((*(state->b))->content) > *(int*)(((*(state->b))->next)->content))
-		{
-			exec_instr(state, SB);
-			return (1);
-		}
+		exec_instr(state, SA);
+		return (1);
 	}
 	return (0);
 }

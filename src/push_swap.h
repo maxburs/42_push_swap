@@ -58,8 +58,8 @@ typedef struct				s_state
 }							t_state;
 
 extern int					g_flags;
-extern char const (* const 	g_instr[]);
-extern int (* const			g_func[])(t_list **a, t_list **b);
+extern char const (*const 	g_instr[]);
+extern int (*const			g_func[])(t_list **a, t_list **b);
 
 int							execute_instructions(t_list **a, t_list **b, char **instr);
 int							get_instructions(char ***instr_return);
@@ -95,16 +95,16 @@ t_list						**stack_of_type(t_state *stack, int stack_type);
 */
 t_list						*ft_lst_last(t_list *stack);
 int							path_to_smallest(t_state *state, int stack_type);
-int							find_smallest(t_list *stack);
-int							find_biggest(t_list *stack);
+int							find_smallest(t_state *state, int stack_type);
+int							find_biggest(t_state *state, int stack_type);
 t_list						*find_n_smallest(t_list *stack, int n);
 int							lst_is_order(t_list *stack, int smallest);
 int							stack_size(t_list *stack);
+int							find_biggest_old(t_list *stack);
 
 int							merge_sort(t_state *state);
 int							hybrid_sort(t_state *state);
 int							nth_smallest(t_list *stack, int n);
-
 
 /*
 ** free.c

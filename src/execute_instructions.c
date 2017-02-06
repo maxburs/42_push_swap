@@ -14,7 +14,7 @@
 #include <string.h>
 #include <push_swap.h>
 
-char const *const 		g_instr[] = {
+char const *const	g_instr[] = {
 	"sa",
 	"sb",
 	"ss",
@@ -44,6 +44,15 @@ int (*const			g_func[])(t_list **a, t_list **b) = {
 	NULL
 };
 
+static void		invalid_operation(char *operation)
+{
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
+	ft_putstr_fd("invalid operation: ->", 2);
+	ft_putstr_fd(operation, 2);
+	ft_putstr_fd("<-\n\n", 2);
+}
+
 int				execute_instructions(t_list **a, t_list **b, char **instr)
 {
 	int		i;
@@ -58,18 +67,13 @@ int				execute_instructions(t_list **a, t_list **b, char **instr)
 			if (ft_strequ(*instr, g_instr[i]))
 			{
 				(*g_func[i])(a, b);
-				if (g_flags & FLAG_VERBOSE)
-					print_instr_res(a, b, *instr);
+				print_instr_res(a, b, *instr);
 				break ;
 			}
 			i++;
-			if (g_flags & FLAG_VERBOSE && !g_instr[i])
-			{
-				ft_putstr_fd("invalid operation: ->", 2);
-				ft_putstr_fd(*instr, 2);
-				ft_putstr_fd("<-\n", 2);
-			}
 		}
+		if (!g_instr[i])
+			invalid_operation(*instr);
 		instr++;
 	}
 	return (0);

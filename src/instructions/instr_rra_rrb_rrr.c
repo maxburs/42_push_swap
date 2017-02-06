@@ -56,7 +56,7 @@ int				exec_rra(t_list **a, t_list **b)
 	return (lst_rrotate(a));
 }
 
-int		exec_rrb(t_list **a, t_list **b)
+int				exec_rrb(t_list **a, t_list **b)
 {
 	UNUSED(a);
 	return (lst_rrotate(b));

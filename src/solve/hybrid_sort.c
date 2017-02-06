@@ -13,6 +13,24 @@
 #include <libft.h>
 #include <push_swap.h>
 
+static int		pick_move_type(t_state *state, int stack_type)
+{
+	if (stack_type == STACK_A)
+	{
+		if (path_to_smallest(state, stack_type) > 0)
+			return (RA);
+		else
+			return (RRA);
+	}
+	else
+	{
+		if (path_to_smallest(state, stack_type) > 0)
+			return (RB);
+		else
+			return (RRB);
+	}
+}
+
 /*
 ** moves a stack to the smallest integer in it
 ** bubble sorting along the way
@@ -21,17 +39,14 @@
 static int		goto_smallest_bubble(t_state *state, int stack_type)
 {
 	int		smallest;
-	t_list	**stack;
 	int		move;
 	int		biggest;
 
 	if (g_flags & FLAG_VERBOSE)
 		ft_putstr("   --- starting: goto_smallest_bubble\n\n");
-	stack = stack_type == STACK_A ? state->a : state->b;
-	smallest = find_smallest(*stack_of_type(state, stack_type));
-	biggest = find_biggest(*stack_of_type(state, stack_type));
-	move = (path_to_smallest(state, stack_type) > 0) ? (stack_type == STACK_A ? RA : RB)
-				: (stack_type == STACK_A ? RRA : RRB);
+	smallest = find_smallest(state, stack_type);
+	biggest = find_biggest(state, stack_type);
+	move = pick_move_type(state, stack_type);
 	while (top_of_stack(state, stack_type) != smallest)
 	{
 		if ((top_of_stack(state, stack_type) != biggest)

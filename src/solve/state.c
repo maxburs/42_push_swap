@@ -19,14 +19,12 @@
 ** returns negative if its faster to rotate backwards
 */
 
-int		path_to_smallest(t_state *state, int stack_type)
+static int		path_to_smallest_base(t_list *stack)
 {
 	int		front;
 	int		back;
 	int		smallest;
-	t_list	*stack;
 
-	stack = *stack_of_type(state, stack_type);
 	front = 0;
 	back = 0;
 	if (!stack)
@@ -48,7 +46,12 @@ int		path_to_smallest(t_state *state, int stack_type)
 	return (front < back ? front : -1 * back);
 }
 
-int		find_smallest(t_list *stack)
+int				path_to_smallest(t_state *state, int stack_type)
+{
+	return (path_to_smallest_base(*stack_of_type(state, stack_type)));
+}
+
+static int		find_smallest_base(t_list *stack)
 {
 	int		smallest;
 
@@ -65,7 +68,12 @@ int		find_smallest(t_list *stack)
 	return (smallest);
 }
 
-int		find_biggest(t_list *stack)
+int				find_smallest(t_state *state, int stack_type)
+{
+	return (find_smallest_base(*stack_of_type(state, stack_type)));
+}
+
+int		find_biggest_old(t_list *stack)
 {
 	int		biggest;
 
@@ -82,11 +90,16 @@ int		find_biggest(t_list *stack)
 	return (biggest);
 }
 
+int		find_biggest(t_state *state, int stack_type)
+{
+	return (find_biggest_old(*stack_of_type(state, stack_type)));
+}
+
 /*
 ** returns true of spinning the list to the first element will put it in order
 */
 
-int		lst_is_order(t_list *stack, int smallest)
+int				lst_is_order(t_list *stack, int smallest)
 {
 	int		found_smallest;
 	int		last;
@@ -113,7 +126,7 @@ int		lst_is_order(t_list *stack, int smallest)
 	return (1);
 }
 
-int		stack_size(t_list *stack)
+int				stack_size(t_list *stack)
 {
 	int		size;
 
@@ -125,10 +138,10 @@ int		stack_size(t_list *stack)
 		size++;
 		stack = stack->next;
 	}
-	return(size);
+	return (size);
 }
 
-t_list	*ft_lst_last(t_list *stack)
+t_list			*ft_lst_last(t_list *stack)
 {
 	if (!stack)
 		return (NULL);
@@ -136,5 +149,5 @@ t_list	*ft_lst_last(t_list *stack)
 	{
 		stack = stack->next;
 	}
-	return(stack);
+	return (stack);
 }

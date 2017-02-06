@@ -46,7 +46,7 @@ void			print_starting_stack(t_list *stack)
 
 void			print_instructions(char **instr)
 {
-	int 	i;
+	int		i;
 
 	if (!(g_flags & FLAG_VERBOSE))
 		return ;

@@ -14,45 +14,6 @@
 #include <string.h>
 #include <push_swap.h>
 
-#include <stdio.h>
-
-/*
-t_list			**smallest_address(t_list **stack)
-{
-	int		smallest;
-	t_list	**smallest_address;
-
-	smallest = *(int*)(stack->content);
-	smallest_address = stack;
-	stack = &((*stack)->next);
-	while (*stack)
-	{
-		if (*(int*)((*stack)->content) < smallest)
-		{
-			smallest = *(int*)(stack->content);
-			smallest_address = stack;
-		}
-		stack = &((*stack)->next);
-	}
-	return (smallest_address);
-}
-*/
-
-/*
-t_list			**lst_contains(t_list **stack, int find_me)
-{
-	while (*stack)
-	{
-		if (*(int*)((*stack)->content) == find_me)
-		{
-			return (stack);
-		}
-		stack = &((*stack)->next);
-	}
-	return (NULL);
-}
-*/
-
 static int		*biggest_address(t_list *stack)
 {
 	int		*biggest;
@@ -108,16 +69,13 @@ t_list			*find_n_smallest(t_list *stack, int n)
 	return (smallest);
 }
 
-int			nth_smallest(t_list *stack, int n)
+int				nth_smallest(t_list *stack, int n)
 {
 	t_list	*smallest;
 	int		biggest_smallest;
 
 	smallest = find_n_smallest(stack, n);
-	//ft_putstr("smallest found: ");
-	//print_stack(smallest);
-	//ft_putchar('\n');
-	biggest_smallest = find_biggest(smallest);
+	biggest_smallest = find_biggest_old(smallest);
 	free_stack(&smallest);
 	return (biggest_smallest);
 }
