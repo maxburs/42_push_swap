@@ -12,6 +12,7 @@
 
 #include <libft.h>
 #include <push_swap.h>
+#include <stdlib.h>
 
 static void		print_meta(t_meta *meta)
 {
@@ -120,18 +121,21 @@ int				merge_sort(t_state *state)
 {
 	t_meta		meta;
 
-	meta.sort_size = 2;
+	free(build_order_map(10));
+	UNUSED(&first_pass_bubble);
+	meta.sort_size = 1;
 	meta.total_size = stack_size(*(state->a));
 	while (meta.sort_size < meta.total_size)
 	{
 		meta.size_remaining = meta.total_size;
+		meta.order_reverse = 1;
 		while (meta.size_remaining)
 		{
-			first_pass_bubble(state, &meta);
+			//first_pass_bubble(state, &meta);
 			init_next_chunk(&meta);
 			push_chunk_to_b(state, &meta);
 			init_next_chunk(&meta);
-			first_pass_bubble(state, &meta);
+			//first_pass_bubble(state, &meta);
 			goto_end_of_chunk(state, &meta);
 			merge_chunks(state, &meta);
 			goto_end_of_chunk(state, &meta);

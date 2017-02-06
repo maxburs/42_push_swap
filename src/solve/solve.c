@@ -52,9 +52,10 @@ int		try_bubble(t_state *state, int stack_type)
 	return (0);
 }
 
-int		try_rbubble(t_state *state, int stack_type)
+int		try_rbubble(t_state *state, int stack_type, int reverse)
 {
-	if (top_of_stack(state, stack_type) < next_in_stack(state, stack_type))
+	if ((!reverse && top_of_stack(state, stack_type) < next_in_stack(state, stack_type))
+		|| (reverse && top_of_stack(state, stack_type) > next_in_stack(state, stack_type)))
 	{
 		if (stack_type == STACK_A)
 			exec_instr(state, SA);

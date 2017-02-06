@@ -68,6 +68,7 @@ typedef struct	s_meta
 	int			size_remaining;
 	int			chunk_left;
 	int			chunk_size;
+	int			order_reverse;
 }				t_meta;
 
 extern int					g_flags;
@@ -99,7 +100,7 @@ int							solve(t_list **instr, t_list **a, t_list **b);
 int							exec_instr(t_state *state, int instr);
 int							exec_n_instr(t_state *state, int instr, int n);
 int							try_bubble(t_state *state, int stack_type);
-int							try_rbubble(t_state *state, int stack_type);
+int							try_rbubble(t_state *state, int stack_type, int reverse);
 int							top_of_stack(t_state *state, int stack_type);
 int							next_in_stack(t_state *state, int stack_type);
 t_list						**stack_of_type(t_state *stack, int stack_type);
@@ -121,6 +122,7 @@ int							merge_sort(t_state *state);
 int							hybrid_sort(t_state *state);
 int							nth_smallest(t_list *stack, int n);
 int							merge_sort_old(t_state *state);
+_Bool						*build_order_map(size_t size);
 
 /*
 ** free.c
