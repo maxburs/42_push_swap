@@ -11,18 +11,22 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <string.h>
+#include <push_swap.h>
 
 /*
 ** returns the number of rotate to get to the smallest int
 ** returns negative if its faster to rotate backwards
 */
 
-int		path_to_smallest(t_list *stack)
+int		path_to_smallest(t_state *state, int stack_type)
 {
 	int		front;
 	int		back;
 	int		smallest;
+	t_list	*stack;
 
+	stack = *stack_of_type(state, stack_type);
 	front = 0;
 	back = 0;
 	if (!stack)
@@ -107,4 +111,30 @@ int		lst_is_order(t_list *stack, int smallest)
 	if (first < last)
 		return (0);
 	return (1);
+}
+
+int		stack_size(t_list *stack)
+{
+	int		size;
+
+	if (!stack)
+		return (0);
+	size = 0;
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return(size);
+}
+
+t_list	*ft_lst_last(t_list *stack)
+{
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+	{
+		stack = stack->next;
+	}
+	return(stack);
 }

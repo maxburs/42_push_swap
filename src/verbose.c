@@ -11,9 +11,12 @@
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <push_swap.h>
 
 void			print_stack(t_list *stack)
 {
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
 	while (stack)
 	{
 		ft_putnbr(*(int*)(stack->content));
@@ -26,6 +29,8 @@ void			print_stack(t_list *stack)
 
 void			print_stacks(t_list *a, t_list *b)
 {
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
 	ft_putstr("a: ");
 	print_stack(a);
 	ft_putstr("b: ");
@@ -43,6 +48,8 @@ void			print_instructions(char **instr)
 {
 	int 	i;
 
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
 	ft_putstr("operations: ");
 	i = 0;
 	while (instr[i])
@@ -57,6 +64,8 @@ void			print_instructions(char **instr)
 
 void			print_instr_res(t_list **a, t_list **b, char const *instr)
 {
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
 	ft_putstr("operation: ");
 	ft_putstr(instr);
 	ft_putstr("\n");

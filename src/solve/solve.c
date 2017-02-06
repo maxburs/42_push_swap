@@ -5,18 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 20:06:26 by mburson           #+#    #+#             */
-/*   Updated: 2017/02/03 20:06:28 by mburson          ###   ########.fr       */
+/*   Created: 2017/02/05 19:36:26 by mburson           #+#    #+#             */
+/*   Updated: 2017/02/05 19:36:28 by mburson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <push_swap.h>
-#include <stdbool.h>
 
-#include <stdio.h>
-
-static int		exec_instr(t_state *state, int instr)
+int		exec_instr(t_state *state, int instr)
 {
 	if ((*g_func[instr])(state->a, state->b))
 		return (1);
@@ -26,80 +23,83 @@ static int		exec_instr(t_state *state, int instr)
 	return (0);
 }
 
-/*
-**static int		exec_n_instr(t_state *state, int instr, int n)
-**{
-**	while (n)
-**	{
-**		if (exec_instr(state, instr))
-**			return (1);
-**		n--;
-**	}
-**	return (0);
-**}
-*/
 
-/*
-** moves a stack to the smallest integer in it
-** bubble sorting along the way
-*/
-
-static int		goto_smallest_bubble(t_state *state, int is_a)
+int		exec_n_instr(t_state *state, int instr, int n)
 {
-	int		path;
-	int		smallest;
-	t_list	**stack;
-	int		bubble;
-	int		move;
-	int		biggest;
-
-	if (g_flags & FLAG_VERBOSE)
-		ft_putstr("   --- starting: goto_smallest_bubble\n\n");
-	stack = is_a ? state->a : state->b;
-	path = path_to_smallest(*stack);
-	smallest = find_smallest(*stack);
-	biggest = find_biggest(*stack);
-	bubble = is_a ? SA : SB;
-	move = (path > 0) ? (is_a ? RA : RB) : (is_a ? RRA : RRB);
-	while (*(int*)((*stack)->content) != smallest)
+	while (n)
 	{
-		if (*(int*)((*stack)->content) > *(int*)(((*stack)->next)->content)
-			&& (*(int*)((*stack)->content) != biggest)
-			&& (*(int*)(((*stack)->next)->content) != smallest))
-			exec_instr(state, bubble);
-		else
-			exec_instr(state, move);
+		if (exec_instr(state, instr))
+			return (1);
+		n--;
 	}
-	if (g_flags & FLAG_VERBOSE)
-		ft_putstr("   --- ending: goto_smallest_bubble\n\n");
 	return (0);
 }
 
-int				solve(t_list **instr, t_list **a, t_list **b)
+
+/*
+** if the next to elements in the stack type are out of order swap them
+** return 1 if a swap was made, otherwise return 0
+*/
+
+int		try_bubble(t_state *state, int stack_type)
+{
+	if (stack_type == STACK_A)
+	{
+		if (*(int*)((*(state->a))->content) > *(int*)(((*(state->a))->next)->content))
+		{
+			exec_instr(state, SA);
+			return (1);
+		}
+	}
+	else if (stack_type == STACK_B)
+	{
+		if (*(int*)((*(state->b))->content) > *(int*)(((*(state->b))->next)->content))
+		{
+			exec_instr(state, SB);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int		top_of_stack(t_state *state, int stack_type)
+{
+	if (stack_type == STACK_A)
+	{
+		return (*(int*)((*(state->a))->content));
+	}
+	else if (stack_type == STACK_B)
+	{
+		return (*(int*)((*(state->b))->content));
+	}
+	return (0);
+}
+
+int		next_in_stack(t_state *state, int stack_type)
+{
+	if (stack_type == STACK_A)
+	{
+		return (*(int*)(((*(state->a))->next)->content));
+	}
+	else if (stack_type == STACK_B)
+	{
+		return (*(int*)(((*(state->b))->next)->content));
+	}
+	return (0);
+}
+
+t_list	**stack_of_type(t_state *state, int stack_type)
+{
+	return (stack_type == STACK_A ? state->a : state->b);
+}
+
+int		solve(t_list **instr, t_list **a, t_list **b)
 {
 	t_state		state;
 
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
-
-	int		smallest = lst_is_order(*a, find_smallest(*a));
-	ft_putstr("ls_is_order: ");
-	ft_putnbr(smallest);
-	ft_putchar('\n');
-
-	while (*a)
-	{
-		goto_smallest_bubble(&state, true);
-		if (stack_in_order(*a))
-		{
-			if (g_flags & FLAG_VERBOSE)
-				ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
-			break ;
-		}
-		exec_instr(&state, PB);
-	}
-	while (*b)
-		exec_instr(&state, PA);
-	return (0);
+	return (hybrid_sort(&state));
+	//return (merge_sort(&state));
 }

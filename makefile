@@ -32,6 +32,8 @@ PUSH_SWAP_SRC = \
 		execute_instructions.c \
 		solve_check.c \
 		$(addprefix solve/, \
+			merge_sort.c \
+			hybrid_sort.c \
 			solve.c \
 			state.c \
 			find_n_smallest.c \

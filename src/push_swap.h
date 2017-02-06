@@ -19,6 +19,9 @@
 
 # define FLAG_VERBOSE 0x1
 
+# define STACK_A 1
+# define STACK_B 0
+
 # define UNUSED(x) (void)(x)
 
 /*
@@ -75,13 +78,33 @@ int							add_arguments(int argc, char **argv, t_list **a);
 /*
 ** /solve/
 */
+
+/*
+** /solve.c
+*/
 int							solve(t_list **instr, t_list **a, t_list **b);
-int							path_to_smallest(t_list *stack);
+int							exec_instr(t_state *state, int instr);
+int							exec_n_instr(t_state *state, int instr, int n);
+int							try_bubble(t_state *state, int stack_type);
+int							top_of_stack(t_state *state, int stack_type);
+int							next_in_stack(t_state *state, int stack_type);
+t_list						**stack_of_type(t_state *stack, int stack_type);
+
+/*
+** state.c
+*/
+t_list						*ft_lst_last(t_list *stack);
+int							path_to_smallest(t_state *state, int stack_type);
 int							find_smallest(t_list *stack);
 int							find_biggest(t_list *stack);
 t_list						*find_n_smallest(t_list *stack, int n);
-int							nth_smallest(t_list *stack, int n);
 int							lst_is_order(t_list *stack, int smallest);
+int							stack_size(t_list *stack);
+
+int							merge_sort(t_state *state);
+int							hybrid_sort(t_state *state);
+int							nth_smallest(t_list *stack, int n);
+
 
 /*
 ** free.c
