@@ -134,6 +134,7 @@ void						print_stack(t_list *stack);
 ** solve/
 */
 int							hybrid_sort(t_state *state);
+int							small_hybrid_sort(t_state *state);
 _Bool						*build_order_map(size_t size);
 
 t_list						*find_n_smallest(t_list *stack, int n);
