@@ -64,8 +64,9 @@ t_list			*find_n_smallest(t_list *stack, int n)
 	if (!stack)
 		return (NULL);
 	smallest = NULL;
-	if (!(clone_n_links(stack, &smallest, n))
-		|| !(biggest = biggest_address(smallest)))
+	if (clone_n_links(stack, &smallest, n))
+		return (NULL);
+	if (!(biggest = biggest_address(smallest)))
 		return (NULL);
 	while (n)
 	{

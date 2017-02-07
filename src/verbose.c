@@ -17,6 +17,8 @@ void			print_stack(t_list *stack)
 {
 	if (!(g_flags & FLAG_VERBOSE))
 		return ;
+	if (!stack)
+		ft_putstr("NULL stack");
 	while (stack)
 	{
 		ft_putnbr(*(int*)(stack->content));
