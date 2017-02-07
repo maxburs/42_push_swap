@@ -35,8 +35,7 @@ static int		*biggest_address(t_list *stack)
 }
 
 /*
-** returns a linked list containing the
-**     n smallest numbers in the given linked list
+** clone the first n links of src and then set dst to point to them
 */
 
 static int		clone_n_links(t_list *src, t_list **dst, int n)
@@ -44,7 +43,7 @@ static int		clone_n_links(t_list *src, t_list **dst, int n)
 	while (n)
 	{
 		if (src)
-			ft_lstadd(dst, ft_lstnew(src->content, src->content_size));
+			ft_lstbadd(dst, ft_lstnew(src->content, src->content_size));
 		else
 		{
 			free_stack(dst);
@@ -55,6 +54,11 @@ static int		clone_n_links(t_list *src, t_list **dst, int n)
 	}
 	return (0);
 }
+
+/*
+** returns a linked list containing the
+**     n smallest numbers in the given linked list
+*/
 
 t_list			*find_n_smallest(t_list *stack, int n)
 {

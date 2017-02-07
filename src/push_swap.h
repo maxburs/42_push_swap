@@ -25,16 +25,24 @@
 # define UNUSED(x) (void)(x)
 
 /*
-** sa : swap a - swap the first 2 elements at the top of stack a. Do nothing if there is only one or ** no elements).
-** sb : swap b - swap the first 2 elements at the top of stack b. Do nothing if there is only one or ** no elements).
+** sa : swap a - swap the first 2 elements at the top of stack a. Do nothing
+**         if there is only one or ** no elements).
+** sb : swap b - swap the first 2 elements at the top of stack b. Do nothing
+**         if there is only one or ** no elements).
 ** ss : sa and sb at the same time.
-** pa : push a - take the first element at the top of b and put it at the top of a. Do nothing if b is empty.
-** pb : push b - take the first element at the top of a and put it at the top of b. Do nothing if a is empty.
-** ra : rotate a - shift up all elements of stack a by 1. The first element becomes the last one.
-** rb : rotate b - shift up all elements of stack b by 1. The first element becomes the last one.
+** pa : push a - take the first element at the top of b and put it at the top
+**         of a. Do nothing if b is empty.
+** pb : push b - take the first element at the top of a and put it at the top
+**         of b. Do nothing if a is empty.
+** ra : rotate a - shift up all elements of stack a by 1. The first element
+**         becomes the last one.
+** rb : rotate b - shift up all elements of stack b by 1. The first element
+**         becomes the last one.
 ** rr : ra and rb at the same time.
-** rra : reverse rotate a - shift down all elements of stack a by 1. The flast element becomes the ** first one.
-** rrb : reverse rotate b - shift down all elements of stack b by 1. The flast element becomes the ** first one.
+** rra : reverse rotate a - shift down all elements of stack a by 1. The flast
+**          element becomes the ** first one.
+** rrb : reverse rotate b - shift down all elements of stack b by 1. The flast
+**          element becomes the ** first one.
 ** rrr : rra and rrb at the same time.
 */
 # define SA 0
@@ -49,7 +57,6 @@
 # define RRB 9
 # define RRR 10
 
-
 typedef struct				s_state
 {
 	t_list	**instr;
@@ -59,9 +66,8 @@ typedef struct				s_state
 
 /*
 ** used in merge sort
-**/
-
-typedef struct	s_meta
+*/
+typedef struct				s_meta
 {
 	int			sort_size;
 	int			total_size;
@@ -69,16 +75,17 @@ typedef struct	s_meta
 	int			chunk_left;
 	int			chunk_size;
 	_Bool		*reverse_map;
-	size_t		map_spot;
-	_Bool		*first_pass_map;
-	size_t		first_pass_spot;
-}				t_meta;
+	size_t		map_index;
+	_Bool		*bubble_map;
+	size_t		bubble_index;
+}							t_meta;
 
 extern int					g_flags;
-extern char const (*const 	g_instr[]);
+extern char const (*const	g_instr[]);
 extern int (*const			g_func[])(t_list **a, t_list **b);
 
-int							execute_instructions(t_list **a, t_list **b, char **instr);
+int							execute_instructions(t_list **a, t_list **b,
+								char **instr);
 int							get_instructions(char ***instr_return);
 
 /*
@@ -103,7 +110,8 @@ int							solve(t_list **instr, t_list **a, t_list **b);
 int							exec_instr(t_state *state, int instr);
 int							exec_n_instr(t_state *state, int instr, int n);
 int							try_bubble(t_state *state, int stack_type);
-int							try_rbubble(t_state *state, int stack_type, int reverse);
+int							try_rbubble(t_state *state, int stack_type,
+								int reverse);
 int							top_of_stack(t_state *state, int stack_type);
 int							next_in_stack(t_state *state, int stack_type);
 t_list						**stack_of_type(t_state *stack, int stack_type);
@@ -131,7 +139,8 @@ _Bool						*build_order_map(size_t size);
 int							merge_sort(t_state *state);
 int							merge_chunks(t_state *state, t_meta *meta);
 void						print_meta(t_meta *meta);
-
+void						merge_bubble(t_state *state, t_meta *meta);
+int							merge_chunk_to_b(t_state *state, t_meta *meta);
 
 /*
 ** free.c
@@ -160,7 +169,8 @@ int							exec_rrr(t_list **a, t_list **b);
 void						print_starting_stack(t_list *stack);
 void						print_instructions(char **instr);
 void						print_stacks(t_list *a, t_list *b);
-void						print_instr_res(t_list **a, t_list **b, char const *instr);
+void						print_instr_res(t_list **a, t_list **b,
+								char const *instr);
 void						print_stack(t_list *stack);
 
 #endif

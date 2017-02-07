@@ -41,7 +41,6 @@ static _Bool	*increase_size(_Bool *map, size_t size)
 		l += 2;
 	}
 	return (map_new);
-	
 }
 
 static int		print_order_map(_Bool *map, size_t size)

@@ -13,8 +13,6 @@
 #include <libft.h>
 #include <push_swap.h>
 
-#include <stdio.h>
-
 int		exec_instr(t_state *state, int instr)
 {
 	if ((*g_func[instr])(state->a, state->b))
@@ -54,10 +52,16 @@ int		try_bubble(t_state *state, int stack_type)
 	return (0);
 }
 
+/*
+** similar to try_bubble but lets you specify the sorting direction
+*/
+
 int		try_rbubble(t_state *state, int stack_type, int reverse)
 {
-	if ((!reverse && top_of_stack(state, stack_type) > next_in_stack(state, stack_type))
-		|| (reverse && top_of_stack(state, stack_type) < next_in_stack(state, stack_type)))
+	if ((!reverse && top_of_stack(state, stack_type)
+			> next_in_stack(state, stack_type))
+		|| (reverse && top_of_stack(state, stack_type)
+			< next_in_stack(state, stack_type)))
 	{
 		if (stack_type == STACK_A)
 			exec_instr(state, SA);
@@ -67,6 +71,10 @@ int		try_rbubble(t_state *state, int stack_type, int reverse)
 	}
 	return (0);
 }
+
+/*
+** returns the int at the top of the stack in a linked list of ints
+*/
 
 int		top_of_stack(t_state *state, int stack_type)
 {
@@ -80,6 +88,10 @@ int		top_of_stack(t_state *state, int stack_type)
 	}
 	return (0);
 }
+
+/*
+** returns the int next in the stack in a linked list of ints
+*/
 
 int		next_in_stack(t_state *state, int stack_type)
 {
@@ -102,8 +114,6 @@ t_list	**stack_of_type(t_state *state, int stack_type)
 int		solve(t_list **instr, t_list **a, t_list **b)
 {
 	t_state		state;
-
-	print_stack(find_n_smallest(*a, 5));
 
 	state.instr = instr;
 	state.a = a;

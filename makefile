@@ -39,6 +39,7 @@ PUSH_SWAP_SRC = \
 			find_n_smallest.c \
 			order_map.c \
 			$(addprefix merge_sort/, \
+				merge_misc.c \
 				merge_sort.c \
 				merge_chunks.c \
 			) \
