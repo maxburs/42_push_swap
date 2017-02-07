@@ -13,11 +13,14 @@
 #include <libft.h>
 #include <string.h>
 #include <push_swap.h>
+#include <limits.h>
 
 static int		*biggest_address(t_list *stack)
 {
 	int		*biggest;
 
+	if (!stack)
+		return (NULL);
 	biggest = (int*)(stack->content);
 	stack = stack->next;
 	while (stack)
@@ -36,6 +39,23 @@ static int		*biggest_address(t_list *stack)
 **     n smallest numbers in the given linked list
 */
 
+static int		clone_n_links(t_list *src, t_list **dst, int n)
+{
+	while (n)
+	{
+		if (src)
+			ft_lstadd(dst, ft_lstnew(src->content, src->content_size));
+		else
+		{
+			free_stack(dst);
+			return (1);
+		}
+		src = src->next;
+		n--;
+	}
+	return (0);
+}
+
 t_list			*find_n_smallest(t_list *stack, int n)
 {
 	t_list	*smallest;
@@ -44,19 +64,14 @@ t_list			*find_n_smallest(t_list *stack, int n)
 	if (!stack)
 		return (NULL);
 	smallest = NULL;
+	if (!(clone_n_links(stack, &smallest, n))
+		|| !(biggest = biggest_address(smallest)))
+		return (NULL);
 	while (n)
 	{
-		if (stack)
-			ft_lstadd(&smallest, ft_lstnew(stack->content, stack->content_size));
-		else
-		{
-			free_stack(&smallest);
-			return (NULL);
-		}
 		stack = stack->next;
 		n--;
 	}
-	biggest = biggest_address(smallest);
 	while (stack)
 	{
 		if (*(int*)(stack->content) < *biggest)
