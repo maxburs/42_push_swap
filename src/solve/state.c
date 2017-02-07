@@ -19,12 +19,14 @@
 ** returns negative if its faster to rotate backwards
 */
 
-static int		path_to_smallest_base(t_list *stack)
+int				path_to_smallest(t_state *state, int stack_type)
 {
+	t_list	*stack;
 	int		front;
 	int		back;
 	int		smallest;
 
+	stack = *stack_of_type(state, stack_type);
 	front = 0;
 	back = 0;
 	if (!stack)
@@ -44,11 +46,6 @@ static int		path_to_smallest_base(t_list *stack)
 	}
 	back++;
 	return (front < back ? front : -1 * back);
-}
-
-int				path_to_smallest(t_state *state, int stack_type)
-{
-	return (path_to_smallest_base(*stack_of_type(state, stack_type)));
 }
 
 static int		find_smallest_base(t_list *stack)
