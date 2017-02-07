@@ -33,12 +33,15 @@ PUSH_SWAP_SRC = \
 		execute_instructions.c \
 		solve_check.c \
 		$(addprefix solve/, \
-			merge_sort.c \
 			hybrid_sort.c \
 			solve.c \
 			state.c \
 			find_n_smallest.c \
 			order_map.c \
+			$(addprefix merge_sort/, \
+				merge_sort.c \
+				merge_chunks.c \
+			) \
 		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \

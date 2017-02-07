@@ -78,6 +78,7 @@ _Bool			*build_order_map(size_t size)
 	cur_size = 1;
 	if (!(map = (_Bool*)malloc(sizeof(_Bool))))
 		return (NULL);
+	*map = 0;
 	while (cur_size < size)
 	{
 		cur_size *= 2;

@@ -13,6 +13,8 @@
 #include <libft.h>
 #include <push_swap.h>
 
+#include <stdio.h>
+
 int		exec_instr(t_state *state, int instr)
 {
 	if ((*g_func[instr])(state->a, state->b))
@@ -54,8 +56,8 @@ int		try_bubble(t_state *state, int stack_type)
 
 int		try_rbubble(t_state *state, int stack_type, int reverse)
 {
-	if ((!reverse && top_of_stack(state, stack_type) < next_in_stack(state, stack_type))
-		|| (reverse && top_of_stack(state, stack_type) > next_in_stack(state, stack_type)))
+	if ((!reverse && top_of_stack(state, stack_type) > next_in_stack(state, stack_type))
+		|| (reverse && top_of_stack(state, stack_type) < next_in_stack(state, stack_type)))
 	{
 		if (stack_type == STACK_A)
 			exec_instr(state, SA);
@@ -105,6 +107,5 @@ int		solve(t_list **instr, t_list **a, t_list **b)
 	state.a = a;
 	state.b = b;
 	//return (hybrid_sort(&state));
-	//return (merge_sort_old(&state));
 	return (merge_sort(&state));
 }

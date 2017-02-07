@@ -68,7 +68,10 @@ typedef struct	s_meta
 	int			size_remaining;
 	int			chunk_left;
 	int			chunk_size;
-	int			order_reverse;
+	_Bool		*reverse_map;
+	size_t		map_spot;
+	_Bool		*first_pass_map;
+	size_t		first_pass_spot;
 }				t_meta;
 
 extern int					g_flags;
@@ -90,11 +93,11 @@ int							stack_in_order(t_list *stack);
 int							add_arguments(int argc, char **argv, t_list **a);
 
 /*
-** /solve/
+** solve/
 */
 
 /*
-** /solve.c
+** solve.c
 */
 int							solve(t_list **instr, t_list **a, t_list **b);
 int							exec_instr(t_state *state, int instr);
@@ -118,11 +121,17 @@ int							stack_size(t_list *stack);
 int							find_biggest_old(t_list *stack);
 int							last_in_stack(t_state *state, int stack_type);
 
-int							merge_sort(t_state *state);
 int							hybrid_sort(t_state *state);
 int							nth_smallest(t_list *stack, int n);
-int							merge_sort_old(t_state *state);
 _Bool						*build_order_map(size_t size);
+
+/*
+** merge_sort/
+*/
+int							merge_sort(t_state *state);
+int							merge_chunks(t_state *state, t_meta *meta);
+void						print_meta(t_meta *meta);
+
 
 /*
 ** free.c
@@ -131,7 +140,7 @@ void						free_instructions(char ***instr);
 void						free_stack(t_list **stack);
 
 /*
-** ./instructions/
+** instructions/
 */
 int							exec_sa(t_list **a, t_list **b);
 int							exec_sb(t_list **a, t_list **b);
