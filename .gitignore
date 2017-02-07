@@ -4,5 +4,5 @@
 *.out
 .nfs.*
 checker
-push_swap
+./push_swap
 .vscode/
