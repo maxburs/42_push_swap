@@ -139,22 +139,25 @@ _Bool						*build_order_map(size_t size);
 t_list						*find_n_smallest(t_list *stack, int n);
 int							nth_smallest(t_list *stack, int n);
 
-
 /*
 ** solve.c
+*/
+int							top_of_stack(t_state *state, int stack_type);
+int							next_in_stack(t_state *state, int stack_type);
+t_list						**stack_of_type(t_state *state, int stack_type);
+int							solve(t_list **instr, t_list **a, t_list **b);
+
+/*
+** state_manip.c
 */
 int							exec_instr(t_state *state, int instr);
 int							exec_n_instr(t_state *state, int instr, int n);
 int							try_bubble(t_state *state, int stack_type);
 int							try_rbubble(t_state *state, int stack_type,
 								int reverse);
-int							top_of_stack(t_state *state, int stack_type);
-int							next_in_stack(t_state *state, int stack_type);
-t_list						**stack_of_type(t_state *stack, int stack_type);
-int							solve(t_list **instr, t_list **a, t_list **b);
 
 /*
-** state.c
+** state_search.c
 */
 int							path_to_smallest(t_state *state, int stack_type);
 int							last_in_stack(t_state *state, int stack_type);
@@ -178,5 +181,10 @@ int							merge_chunks(t_state *state, t_meta *meta);
 void						print_meta(t_meta *meta);
 void						merge_bubble(t_state *state, t_meta *meta);
 int							merge_chunk_to_b(t_state *state, t_meta *meta);
+
+/*
+** double_bubble_sort/
+*/
+int							double_bubble_sort(t_state *state);
 
 #endif
