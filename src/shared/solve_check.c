@@ -36,4 +36,3 @@ int		solve_check(t_list *a, t_list *b)
 		return (0);
 	return (stack_in_order(a));
 }
-

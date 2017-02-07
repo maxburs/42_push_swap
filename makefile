@@ -41,8 +41,9 @@ PUSH_SWAP_SRC = \
 			hybrid_sort.c \
 			list.c \
 			push_swap.c \
-			state.c \
 			solve.c \
+			state_manip.c \
+			state_search.c \
 			$(addprefix merge_sort/, \
 				merge_misc.c \
 				merge_sort.c \
