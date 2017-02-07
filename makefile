@@ -7,18 +7,22 @@ LIBFT_DIR = ./libft/
 
 CHECKER_SRC = \
 	$(addprefix ./src/, \
-		add_arguments.c \
-		checker.c \
-		verbose.c \
-		execute_instructions.c \
-		get_instructions.c \
-		solve_check.c \
-		free.c \
+		$(addprefix shared/, \
+			add_arguments.c \
+			free.c \
+			solve_check.c \
+			verbose.c \
+		) \
+		$(addprefix checker/, \
+			checker.c \
+			get_instructions.c \
+		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \
 			instr_pa_pb.c \
 			instr_ra_rb_rr.c \
 			instr_rra_rrb_rrr.c \
+			execute_instructions.c \
 		) \
 	)
 
@@ -26,22 +30,24 @@ CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 
 PUSH_SWAP_SRC = \
 	$(addprefix ./src/, \
-		push_swap.c \
-		verbose.c \
-		add_arguments.c \
-		free.c \
-		execute_instructions.c \
-		solve_check.c \
-		$(addprefix solve/, \
-			hybrid_sort.c \
-			solve.c \
-			state.c \
+		$(addprefix shared/, \
+			add_arguments.c \
+			free.c \
+			solve_check.c \
+			verbose.c \
+		) \
+		$(addprefix push_swap/, \
 			find_n_smallest.c \
-			order_map.c \
+			hybrid_sort.c \
+			list.c \
+			push_swap.c \
+			state.c \
+			solve.c \
 			$(addprefix merge_sort/, \
 				merge_misc.c \
 				merge_sort.c \
 				merge_chunks.c \
+				order_map.c \
 			) \
 		) \
 		$(addprefix instructions/, \
@@ -49,6 +55,7 @@ PUSH_SWAP_SRC = \
 			instr_pa_pb.c \
 			instr_ra_rb_rr.c \
 			instr_rra_rrb_rrr.c \
+			execute_instructions.c \
 		) \
 	)
 

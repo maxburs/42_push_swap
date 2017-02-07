@@ -100,49 +100,6 @@ int							stack_in_order(t_list *stack);
 int							add_arguments(int argc, char **argv, t_list **a);
 
 /*
-** solve/
-*/
-
-/*
-** solve.c
-*/
-int							solve(t_list **instr, t_list **a, t_list **b);
-int							exec_instr(t_state *state, int instr);
-int							exec_n_instr(t_state *state, int instr, int n);
-int							try_bubble(t_state *state, int stack_type);
-int							try_rbubble(t_state *state, int stack_type,
-								int reverse);
-int							top_of_stack(t_state *state, int stack_type);
-int							next_in_stack(t_state *state, int stack_type);
-t_list						**stack_of_type(t_state *stack, int stack_type);
-
-/*
-** state.c
-*/
-t_list						*ft_lst_last(t_list *stack);
-int							path_to_smallest(t_state *state, int stack_type);
-int							find_smallest(t_state *state, int stack_type);
-int							find_biggest(t_state *state, int stack_type);
-t_list						*find_n_smallest(t_list *stack, int n);
-int							lst_is_order(t_list *stack, int smallest);
-int							stack_size(t_list *stack);
-int							find_biggest_old(t_list *stack);
-int							last_in_stack(t_state *state, int stack_type);
-
-int							hybrid_sort(t_state *state);
-int							nth_smallest(t_list *stack, int n);
-_Bool						*build_order_map(size_t size);
-
-/*
-** merge_sort/
-*/
-int							merge_sort(t_state *state);
-int							merge_chunks(t_state *state, t_meta *meta);
-void						print_meta(t_meta *meta);
-void						merge_bubble(t_state *state, t_meta *meta);
-int							merge_chunk_to_b(t_state *state, t_meta *meta);
-
-/*
 ** free.c
 */
 void						free_instructions(char ***instr);
@@ -172,5 +129,54 @@ void						print_stacks(t_list *a, t_list *b);
 void						print_instr_res(t_list **a, t_list **b,
 								char const *instr);
 void						print_stack(t_list *stack);
+
+/*
+** solve/
+*/
+int							hybrid_sort(t_state *state);
+_Bool						*build_order_map(size_t size);
+
+t_list						*find_n_smallest(t_list *stack, int n);
+int							nth_smallest(t_list *stack, int n);
+
+
+/*
+** solve.c
+*/
+int							exec_instr(t_state *state, int instr);
+int							exec_n_instr(t_state *state, int instr, int n);
+int							try_bubble(t_state *state, int stack_type);
+int							try_rbubble(t_state *state, int stack_type,
+								int reverse);
+int							top_of_stack(t_state *state, int stack_type);
+int							next_in_stack(t_state *state, int stack_type);
+t_list						**stack_of_type(t_state *stack, int stack_type);
+int							solve(t_list **instr, t_list **a, t_list **b);
+
+/*
+** state.c
+*/
+int							path_to_smallest(t_state *state, int stack_type);
+int							last_in_stack(t_state *state, int stack_type);
+int							find_smallest(t_state *state, int stack_type);
+int							find_biggest(t_state *state, int stack_type);
+
+/*
+** list.c
+*/
+int							lst_is_order(t_list *stack, int smallest);
+int							lst_fnd_sml(t_list *stack);
+int							lst_fnd_big(t_list *stack);
+t_list						*ft_lst_last(t_list *stack);
+int							lst_size(t_list *stack);
+
+/*
+** merge_sort/
+*/
+int							merge_sort(t_state *state);
+int							merge_chunks(t_state *state, t_meta *meta);
+void						print_meta(t_meta *meta);
+void						merge_bubble(t_state *state, t_meta *meta);
+int							merge_chunk_to_b(t_state *state, t_meta *meta);
 
 #endif
