@@ -38,12 +38,15 @@ PUSH_SWAP_SRC = \
 		) \
 		$(addprefix push_swap/, \
 			find_n_smallest.c \
-			hybrid_sort.c \
+			small_hybrid_sort.c \
 			list.c \
 			push_swap.c \
 			solve.c \
 			state_manip.c \
 			state_search.c \
+			$(addprefix insertion_sort/, \
+				insertion_sort.c \
+			) \
 			$(addprefix merge_sort/, \
 				merge_misc.c \
 				merge_sort.c \

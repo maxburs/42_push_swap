@@ -48,6 +48,33 @@ int			path_to_smallest(t_state *state, int stack_type)
 	return (front < back ? front : -1 * back);
 }
 
+int			path_to_end(t_state *state, int stack_type)
+{
+	t_list	*stack;
+	int		front;
+	int		back;
+	int		diff;
+
+	if (!(stack = *stack_of_type(state, stack_type)))
+		return (0);
+	front = 0;
+	back = 0;
+	diff = last_in_stack(state, stack_type) - *(int*)(stack->content);
+	while (stack->next)
+	{
+		back++;
+		if (*(int*)(stack->content) - *(int*)((stack->next)->content) > diff)
+		{
+			diff = *(int*)(stack->content) - *(int*)((stack->next)->content);
+			front += back;
+			back = 0;
+		}
+		stack = stack->next;
+	}
+	back++;
+	return (front < back ? front : -1 * back);
+}
+
 int			find_smallest(t_state *state, int stack_type)
 {
 	return (lst_fnd_sml(*stack_of_type(state, stack_type)));

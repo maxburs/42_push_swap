@@ -133,7 +133,7 @@ void						print_stack(t_list *stack);
 /*
 ** solve/
 */
-int							hybrid_sort(t_state *state);
+int							insertion_sort(t_state *state);
 int							small_hybrid_sort(t_state *state);
 _Bool						*build_order_map(size_t size);
 
@@ -162,6 +162,7 @@ int							try_rbubble(t_state *state, int stack_type,
 */
 int							path_to_smallest(t_state *state, int stack_type);
 int							last_in_stack(t_state *state, int stack_type);
+int							path_to_end(t_state *state, int stack_type);
 int							find_smallest(t_state *state, int stack_type);
 int							find_biggest(t_state *state, int stack_type);
 

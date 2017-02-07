@@ -60,8 +60,9 @@ int		solve(t_list **instr, t_list **a, t_list **b)
 	state.a = a;
 	state.b = b;
 	//if (lst_size(*a) < 50)
-		return (hybrid_sort(&state));
+	//	return (hybrid_sort(&state));
 	//else
 	//	return (merge_sort(&state));
 	//return (double_bubble_sort(&state));
+	return (insertion_sort(&state));
 }
