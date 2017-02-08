@@ -80,6 +80,12 @@ int				insertion_sort(t_state *state)
 	while (*(state->b))
 		exec_instr(state, PA);
 	*/
+	int front;
+	int back;
+
+	paths_to_insert(*stack_of_type(state, STACK_A), 3, &front, &back);
+	printf("front: %d\n", front);
+	printf("back: %d\n", back);
 	printf("path to end: %d\n", path_to_end(state, STACK_A));
 	return (0);
 }

@@ -133,7 +133,6 @@ void						print_stack(t_list *stack);
 /*
 ** solve/
 */
-int							insertion_sort(t_state *state);
 int							small_hybrid_sort(t_state *state);
 _Bool						*build_order_map(size_t size);
 
@@ -188,5 +187,11 @@ int							merge_chunk_to_b(t_state *state, t_meta *meta);
 ** double_bubble_sort/
 */
 int							double_bubble_sort(t_state *state);
+
+/*
+** insertion_sort/
+*/
+int							insertion_sort(t_state *state);
+void						find_best_insert(t_state, int &a_path, int &b_path);
 
 #endif
