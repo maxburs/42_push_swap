@@ -12,80 +12,105 @@
 
 #include <libft.h>
 #include <push_swap.h>
+#include <limits.h>
 
 #include <stdio.h>
-/*
-static int		pick_move_type(t_state *state, int stack_type)
+
+
+void			print_path(t_path path)
 {
-	if (stack_type == STACK_A)
-	{
-		if (path_to_smallest(state, stack_type) > 0)
-			return (RA);
-		else
-			return (RRA);
-	}
+	if (!(g_flags & FLAG_VERBOSE))
+		return ;
+	ft_putstr("move stack a ");
+	if (path.a_len > INT_MAX)
+		ft_putstr("REAL DAMN HUGE");
 	else
-	{
-		if (path_to_smallest(state, stack_type) > 0)
-			return (RB);
-		else
-			return (RRB);
-	}
-}
-*/
-/*
-** moves a stack to the smallest integer in it
-** bubble sorting along the way
-*/
-/*
-static int		goto_smallest(t_state *state, int stack_type)
-{
-	int		move;
-	int		smallest;
-	int		biggest;
-
-	if (g_flags & FLAG_VERBOSE)
-		ft_putstr("   --- starting: goto_smallest\n\n");
-	smallest = find_smallest(state, stack_type);
-	biggest = find_biggest(state, stack_type);
-	move = pick_move_type(state, stack_type);
-	while (!(top_of_stack(state, stack_type) == smallest
-				&& last_in_stack(state, stack_type) == biggest))
-	{
-			exec_instr(state, move);
-	}
-	return (0);
+		ft_putnbr((int)path.a_len);
+	if (path.a_dir == FORWARD)
+		ft_putstr(" forward\n");
+	else
+		ft_putstr(" backwards\n");
+	ft_putstr("move stack b ");
+	if (path.b_len > INT_MAX)
+		ft_putstr("REAL DAMN HUGE");
+	else
+		ft_putnbr((int)path.b_len);
+	if (path.b_dir == FORWARD)
+		ft_putstr(" forward\n");
+	else
+		ft_putstr(" backwards\n");
+	ft_putchar('\n');
 }
 
-static int		find_smallest_path(t_state *state, int &bmove, int &amove)
-{
 
-}
-*/
 int				insertion_sort(t_state *state)
 {
-	/*
+	
+	int		end_path;
+	t_path	path;
+
 	while (*(state->a))
 	{
-		
-		if (stack_in_order(*(state->a)))
+		//if (stack_in_order(*(state->a)))
+		//{
+		//	if (g_flags & FLAG_VERBOSE)
+		//		ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
+		//	break ;
+		//}
+		path = find_best_path(state);
+		if (g_flags & FLAG_VERBOSE)
+			ft_putstr("   --- path:\n");
+		print_path(path);
+		if (path.a_dir == path.b_dir)
 		{
-			if (g_flags & FLAG_VERBOSE)
-				ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
-			break ;
+			while (path.a_len && path.b_len)
+			{
+				exec_instr(state, path.a_dir == FORWARD ? RR : RRR);
+				path.a_len--;
+				path.b_len--;
+			}
 		}
+		while (path.a_len)
+		{
+			exec_instr(state, path.a_dir == FORWARD ? RA : RRA);
+			path.a_len--;
+		}
+		while (path.b_len)
+		{
+			exec_instr(state, path.b_dir == FORWARD ? RB : RRB);
+			path.b_len--;
+		}
+
+		if (g_flags & FLAG_VERBOSE)
+			ft_putstr("   --- best path completed, pushing...\n\n");
 		exec_instr(state, PB);
 	}
-	goto_smallest(state, STACK_A);
+	end_path = path_to_end(state, STACK_B);
+	if (g_flags & FLAG_VERBOSE)
+	{
+		ft_putstr("   --- end path: ");
+		ft_putnbr(end_path);
+		ft_putchar('\n');
+	}
+	if (end_path > 0)
+		exec_n_instr(state, RB, end_path);
+	else
+		exec_n_instr(state, RRB, end_path * -1);
 	while (*(state->b))
 		exec_instr(state, PA);
-	*/
-	int front;
-	int back;
+/*
+	size_t front;
+	size_t back;
 
-	paths_to_insert(*stack_of_type(state, STACK_A), 3, &front, &back);
-	printf("front: %d\n", front);
-	printf("back: %d\n", back);
-	printf("path to end: %d\n", path_to_end(state, STACK_A));
+	how_to_insert(*stack_of_type(state, STACK_A), 14, &front, &back);
+	printf("front: %zu\n", front);
+	printf("back: %zu\n", back);
+	//printf("path to end: %d\n", path_to_end(state, STACK_A));
+
+	exec_n_instr(state, PB, 9);
+
+	ft_putstr("   --- BEST PATH:\n");
+	print_path(find_best_path(state));
+*/
 	return (0);
 }

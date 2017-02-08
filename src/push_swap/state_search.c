@@ -48,6 +48,10 @@ int			path_to_smallest(t_state *state, int stack_type)
 	return (front < back ? front : -1 * back);
 }
 
+
+/*
+** finds path to finish a stack in reverse order
+*/
 int			path_to_end(t_state *state, int stack_type)
 {
 	t_list	*stack;
@@ -63,7 +67,7 @@ int			path_to_end(t_state *state, int stack_type)
 	while (stack->next)
 	{
 		back++;
-		if (*(int*)(stack->content) - *(int*)((stack->next)->content) > diff)
+		if (*(int*)(stack->content) - *(int*)((stack->next)->content) < diff)
 		{
 			diff = *(int*)(stack->content) - *(int*)((stack->next)->content);
 			front += back;

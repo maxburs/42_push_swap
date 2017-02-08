@@ -191,7 +191,28 @@ int							double_bubble_sort(t_state *state);
 /*
 ** insertion_sort/
 */
+typedef enum				e_direction
+{
+	FORWARD,
+	BACKWARD
+}							t_dir;
+
+/*
+** a path is made up of an offset on stack a and an offset on stack b
+*/
+
+typedef struct				s_path
+{
+	size_t		a_len;
+	t_dir		a_dir;
+	size_t		b_len;
+	t_dir		b_dir;
+}							t_path;
+
 int							insertion_sort(t_state *state);
-void						find_best_insert(t_state, int &a_path, int &b_path);
+t_path						find_best_path(t_state *state);
+void						how_to_insert(t_list *stack, int insert_me,
+								size_t *forward_path, size_t *backwards_path);
+void						print_path(t_path path);
 
 #endif
