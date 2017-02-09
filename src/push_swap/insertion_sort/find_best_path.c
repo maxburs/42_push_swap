@@ -20,19 +20,9 @@
 ** determines the number of comperations to compete a path
 */
 
-int		spy(int print_me)
-{
-	ft_putchar('\n');
-	ft_putnbr(print_me);
-	ft_putchar('\n');
-	return (print_me);
-}
-
 static size_t		operations_to_complete(t_path path)
 {
-	//ft_putstr("   --- comparing path:\n");
-	//print_path(path);
-	if (path.a_dir !=  path.b_dir)
+	if (path.a_dir != path.b_dir)
 	{
 		return (path.a_len + path.b_len);
 	}
@@ -46,68 +36,61 @@ static size_t		operations_to_complete(t_path path)
 	}
 }
 
-static void		update_if_bigger(size_t *best_op_time, t_path *best_path,
-									t_path *new_path)
+/*
+** updates best_op_time and best_path if new_path is shorter
+*/
+
+static void			update_if_bigger(t_paths_meta *meta)
 {
 	size_t		ops;
 
-	ops = operations_to_complete(*new_path);
-	if (*best_op_time > ops)
+	ops = operations_to_complete(meta->new_path);
+	if (meta->best_op_time > ops)
 	{
-		*best_op_time = ops;
-		*best_path = *new_path;
+		meta->best_op_time = ops;
+		meta->best_path = meta->new_path;
 	}
+}
+
+static void			try_path_combinations(t_paths_meta *meta)
+{
+	meta->new_path.a_dir = FORWARD;
+	meta->new_path.b_dir = FORWARD;
+	meta->new_path.a_len = meta->a_forward;
+	meta->new_path.b_len = meta->b_forward;
+	update_if_bigger(meta);
+	meta->new_path.b_dir = BACKWARD;
+	meta->new_path.b_len = meta->b_backward;
+	update_if_bigger(meta);
+	meta->new_path.a_dir = BACKWARD;
+	meta->new_path.a_len = meta->a_backward;
+	update_if_bigger(meta);
+	meta->new_path.b_dir = FORWARD;
+	meta->new_path.b_len = meta->b_forward;
+	update_if_bigger(meta);
 }
 
 /*
 ** finds the shorest path out of all possible paths
 */
 
-t_path			find_best_path(t_state *state)
+t_path				find_best_path(t_state *state)
 {
-	t_list		*stack_a;
-	size_t		best_op_time;
-	t_path		best_path;
-	t_path		new_path;
-
-	size_t		a_forward;
-	size_t		a_backward;
-	size_t		b_forward;
-	size_t		b_backward;
+	t_paths_meta	meta;
+	t_list			*stack_a;
 
 	stack_a = *stack_of_type(state, STACK_A);
-	best_op_time = INT_MAX;
-	a_forward = 0;
-	a_backward = lst_size(*stack_of_type(state, STACK_A));
+	meta.best_op_time = INT_MAX;
+	meta.a_forward = 0;
+	meta.a_backward = lst_size(*stack_of_type(state, STACK_A));
 	while (stack_a)
 	{
-		//ft_putstr("      --- looking to insert: ");
-		//ft_putnbr(*(int*)(stack_a->content));
-		//ft_putchar('\n');
-
 		how_to_insert(*stack_of_type(state, STACK_B), *(int*)(stack_a->content),
-							&b_forward, &b_backward);
-		new_path.a_dir = FORWARD;
-		new_path.b_dir = FORWARD;
-		new_path.a_len = a_forward;
-		new_path.b_len = b_forward;
-		update_if_bigger(&best_op_time, &best_path, &new_path);
-
-		new_path.b_dir = BACKWARD;
-		new_path.b_len = b_backward;
-		update_if_bigger(&best_op_time, &best_path, &new_path);
-		
-		new_path.a_dir = BACKWARD;
-		new_path.a_len = a_backward;
-		update_if_bigger(&best_op_time, &best_path, &new_path);
-		
-		new_path.b_dir = FORWARD;
-		new_path.b_len = b_forward;
-		update_if_bigger(&best_op_time, &best_path, &new_path);
-
+							&meta.b_forward, &meta.b_backward);
+		try_path_combinations(&meta);
 		stack_a = stack_a->next;
-		a_forward++;
-		a_backward--;
+		meta.a_forward++;
+		meta.a_backward--;
 	}
-	return (best_path);
+	return (meta.best_path);
 }

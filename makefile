@@ -55,9 +55,6 @@ PUSH_SWAP_SRC = \
 				merge_chunks.c \
 				order_map.c \
 			) \
-			$(addprefix double_bubble_sort/, \
-				double_bubble_sort.c \
-			) \
 		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \

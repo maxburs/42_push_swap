@@ -209,6 +209,17 @@ typedef struct				s_path
 	t_dir		b_dir;
 }							t_path;
 
+typedef struct				s_paths_meta
+{
+	size_t		best_op_time;
+	t_path		best_path;
+	t_path		new_path;
+	size_t		a_forward;
+	size_t		a_backward;
+	size_t		b_forward;
+	size_t		b_backward;
+}							t_paths_meta;
+
 int							insertion_sort(t_state *state);
 t_path						find_best_path(t_state *state);
 void						how_to_insert(t_list *stack, int insert_me,

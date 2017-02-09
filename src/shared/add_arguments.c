@@ -20,7 +20,7 @@ static int		lst_contains(t_list *list, int num)
 	{
 		if (*(int*)(list->content) == num)
 		{
-			if (g_flags	&& FLAG_VERBOSE)
+			if (g_flags && FLAG_VERBOSE)
 			{
 				ft_putstr("duplicate input: ");
 				ft_putnbr(num);

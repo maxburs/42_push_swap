@@ -58,7 +58,6 @@ int		solve(t_list **instr, t_list **a, t_list **b)
 {
 	t_state		state;
 
-			//printf("error at: %ld\n", (long)INT_MIN * -1);
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
