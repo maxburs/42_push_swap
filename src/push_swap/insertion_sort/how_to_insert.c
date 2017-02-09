@@ -48,12 +48,7 @@ static int				try_largest(t_list *stack, int insert_me,
 	{
 		stack = stack->next;
 	}
-	back++;
-	while (stack && stack->next)
-	{
-		back++;
-		stack = stack->next;
-	}
+	back += lst_size(stack);
 	//printf("path backwards: %zu\n", back);
 	//printf("path forwards: %zu\n", front);
 	//printf("\n");
@@ -93,11 +88,7 @@ static int				try_smallest(t_list *stack, int insert_me,
 	{
 		stack = stack->next;
 	}
-	while (stack && stack->next)
-	{
-		back++;
-		stack = stack->next;
-	}
+	back += lst_size(stack) - 1;
 	//printf("path backwards: %zu\n", back);
 	//printf("path forwards: %zu\n", front);
 	//printf("\n");
