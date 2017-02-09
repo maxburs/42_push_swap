@@ -12,10 +12,11 @@
 
 #include <libft.h>
 #include <push_swap.h>
+#include <stdbool.h>
 
-void			print_stack(t_list *stack)
+void			print_stack(t_list *stack, _Bool verbose)
 {
-	if (!(g_flags & FLAG_VERBOSE))
+	if (verbose == false)
 		return ;
 	if (!stack)
 		ft_putstr("NULL");
@@ -29,28 +30,28 @@ void			print_stack(t_list *stack)
 	ft_putchar('\n');
 }
 
-void			print_stacks(t_list *a, t_list *b)
+void			print_stacks(t_list *a, t_list *b, _Bool verbose)
 {
-	if (!(g_flags & FLAG_VERBOSE))
+	if (verbose == false)
 		return ;
 	ft_putstr("a: ");
-	print_stack(a);
+	print_stack(a, verbose);
 	ft_putstr("b: ");
-	print_stack(b);
+	print_stack(b, verbose);
 	ft_putchar('\n');
 }
 
-void			print_starting_stack(t_list *stack)
+void			print_starting_stack(t_list *stack, _Bool verbose)
 {
 	ft_putstr("starting stack: ");
-	print_stack(stack);
+	print_stack(stack, verbose);
 }
 
-void			print_instructions(char **instr)
+void			print_instructions(char **instr, _Bool verbose)
 {
 	int		i;
 
-	if (!(g_flags & FLAG_VERBOSE))
+	if (verbose == false)
 		return ;
 	ft_putstr("operations: ");
 	i = 0;
@@ -64,12 +65,13 @@ void			print_instructions(char **instr)
 	ft_putchar('\n');
 }
 
-void			print_instr_res(t_list **a, t_list **b, char const *instr)
+void			print_instr_res(t_list **a, t_list **b,
+									char const *instr, _Bool verbose)
 {
-	if (!(g_flags & FLAG_VERBOSE))
+	if (verbose == false)
 		return ;
 	ft_putstr("operation: ");
 	ft_putstr(instr);
 	ft_putstr("\n");
-	print_stacks(*a, *b);
+	print_stacks(*a, *b, verbose);
 }

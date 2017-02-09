@@ -49,12 +49,6 @@ PUSH_SWAP_SRC = \
 				find_best_path.c \
 				how_to_insert.c \
 			) \
-			$(addprefix merge_sort/, \
-				merge_misc.c \
-				merge_sort.c \
-				merge_chunks.c \
-				order_map.c \
-			) \
 		) \
 		$(addprefix instructions/, \
 			instr_sa_sb_ss.c \

@@ -13,14 +13,15 @@
 #include <libft.h>
 #include <push_swap.h>
 #include <limits.h>
+#include <stdbool.h>
 
-static int		lst_contains(t_list *list, int num)
+static int		lst_contains(t_list *list, int num, _Bool verbose)
 {
 	while (list)
 	{
 		if (*(int*)(list->content) == num)
 		{
-			if (g_flags && FLAG_VERBOSE)
+			if (verbose)
 			{
 				ft_putstr("duplicate input: ");
 				ft_putnbr(num);
@@ -61,7 +62,7 @@ static int		parse_arg(char *arg, int *response)
 	return (0);
 }
 
-static int		add_arg_array(t_list **stack, char *argv)
+static int		add_arg_array(t_list **stack, char *argv, _Bool *verbose)
 {
 	char	**split;
 	int		i;
@@ -75,7 +76,7 @@ static int		add_arg_array(t_list **stack, char *argv)
 	{
 		i--;
 		if (parse_arg(split[i], &argument)
-			|| lst_contains(*stack, argument))
+			|| lst_contains(*stack, argument, verbose))
 		{
 			free_instructions(&split);
 			return (1);
@@ -91,21 +92,22 @@ static int		add_arg_array(t_list **stack, char *argv)
 ** not including the zero-ith argument, the filename
 */
 
-int				add_arguments(int argc, char **argv, t_list **stack)
+int				add_arguments(int argc, char **argv, t_list **stack,
+						_Bool *verbose)
 {
 	while (--argc)
 	{
 		if (ft_strequ(argv[argc], "-v"))
 		{
-			g_flags += FLAG_VERBOSE;
+			*verbose = true;
 		}
 		else
 		{
-			if (add_arg_array(stack, argv[argc]))
+			if (add_arg_array(stack, argv[argc], verbose))
 				return (1);
 		}
 	}
-	if (g_flags & FLAG_VERBOSE)
-		print_starting_stack(*stack);
+	if (*verbose)
+		print_starting_stack(*stack, verbose);
 	return (0);
 }

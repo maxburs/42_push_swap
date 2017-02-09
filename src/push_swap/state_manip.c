@@ -18,8 +18,8 @@ int		exec_instr(t_state *state, int instr)
 	if ((*g_func[instr])(state->a, state->b))
 		return (1);
 	ft_lstbadd(state->instr, ft_lstnew(&instr, sizeof(int)));
-	if (g_flags & FLAG_VERBOSE)
-		print_instr_res(state->a, state->b, g_instr[instr]);
+	if (state->verbose)
+		print_instr_res(state->a, state->b, g_instr[instr], state->verbose);
 	return (0);
 }
 

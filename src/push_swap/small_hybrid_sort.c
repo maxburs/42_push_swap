@@ -44,7 +44,7 @@ static int		goto_smallest_bubble(t_state *state, int stack_type)
 	int		move;
 	int		biggest;
 
-	if (g_flags & FLAG_VERBOSE)
+	if (state->verbose)
 		ft_putstr("   --- starting: goto_smallest_bubble\n\n");
 	smallest = find_smallest(state, stack_type);
 	biggest = find_biggest(state, stack_type);
@@ -60,7 +60,7 @@ static int		goto_smallest_bubble(t_state *state, int stack_type)
 		else
 			exec_instr(state, move);
 	}
-	if (g_flags & FLAG_VERBOSE)
+	if (state->verbose)
 		ft_putstr("   --- ending: goto_smallest_bubble\n\n");
 	return (0);
 }
@@ -72,7 +72,7 @@ int				small_hybrid_sort(t_state *state)
 		goto_smallest_bubble(state, STACK_A);
 		if (stack_in_order(*(state->a)))
 		{
-			if (g_flags & FLAG_VERBOSE)
+			if (state->verbose)
 				ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
 			break ;
 		}

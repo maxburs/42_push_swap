@@ -17,7 +17,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-int		get_instructions(char ***instr_return)
+int		get_instructions(char ***instr_return, _Bool verbose)
 {
 	char	buff[BUFF_SIZE];
 	t_lstr	*l;
@@ -32,7 +32,7 @@ int		get_instructions(char ***instr_return)
 	instr_raw = ft_lstr_finish(&l);
 	*instr_return = ft_strsplit(instr_raw, '\n');
 	free(instr_raw);
-	if (g_flags & FLAG_VERBOSE)
-		print_instructions(*instr_return);
+	if (verbose)
+		print_instructions(*instr_return, verbose);
 	return (0);
 }

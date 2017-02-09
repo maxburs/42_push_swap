@@ -13,10 +13,10 @@
 #include <push_swap.h>
 #include <libft.h>
 #include <unistd.h>
+#include <stdbool.h>
+#include <string.h>
 
-int		g_flags;
-
-int		print_lst_instr(t_list *instr)
+int		print_lst_instr(t_list *instr, _Bool verbose)
 {
 	while (instr)
 	{
@@ -24,7 +24,7 @@ int		print_lst_instr(t_list *instr)
 			ft_putstr(g_instr[*(int*)(instr->content)]);
 		else
 		{
-			if (g_flags & FLAG_VERBOSE)
+			if (verbose)
 				ft_putstr_fd("instruction parse error", 2);
 			return (1);
 		}
@@ -39,13 +39,15 @@ int		main(int argc, char **argv)
 	t_list	*instr;
 	t_list	*a;
 	t_list	*b;
+	_Bool	verbose;
 
+	verbose = false;
 	instr = NULL;
 	a = NULL;
 	b = NULL;
-	if (add_arguments(argc, argv, &a)
-		|| solve(&instr, &a, &b)
-		|| print_lst_instr(instr))
+	if (add_arguments(argc, argv, &a, &verbose)
+		|| solve(&instr, &a, &b, verbose)
+		|| print_lst_instr(instr, verbose))
 	{
 		write(2, "Error\n", 6);
 		return (0);

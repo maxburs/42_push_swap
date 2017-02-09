@@ -13,11 +13,10 @@
 #include <libft.h>
 #include <push_swap.h>
 #include <limits.h>
+#include <stdbool.h>
 
 void			print_path(t_path path)
 {
-	if (!(g_flags & FLAG_VERBOSE))
-		return ;
 	ft_putstr("move stack a ");
 	if (path.a_len > INT_MAX)
 		ft_putstr("REAL DAMN HUGE");
@@ -48,7 +47,7 @@ static void		finish(t_state *state)
 	int		end_path;
 
 	end_path = path_to_end(state, STACK_B);
-	if (g_flags & FLAG_VERBOSE)
+	if (state->verbose)
 	{
 		ft_putstr("   --- end path: ");
 		ft_putnbr(end_path);
@@ -68,9 +67,11 @@ static void		finish(t_state *state)
 
 static void		exec_path(t_state *state, t_path path)
 {
-	if (g_flags & FLAG_VERBOSE)
+	if (state->verbose)
+	{
 		ft_putstr("   --- path:\n");
-	print_path(path);
+		print_path(path);
+	}
 	if (path.a_dir == path.b_dir)
 	{
 		while (path.a_len && path.b_len)
@@ -100,7 +101,7 @@ int				insertion_sort(t_state *state)
 	{
 		path = find_best_path(state);
 		exec_path(state, path);
-		if (g_flags & FLAG_VERBOSE)
+		if (state->verbose)
 			ft_putstr("   --- best path completed, pushing...\n\n");
 		exec_instr(state, PB);
 	}

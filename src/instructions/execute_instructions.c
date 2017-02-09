@@ -13,6 +13,7 @@
 #include <libft.h>
 #include <string.h>
 #include <push_swap.h>
+#include <stdbool.h>
 
 char const *const	g_instr[] = {
 	"sa",
@@ -44,20 +45,21 @@ int (*const			g_func[])(t_list **a, t_list **b) = {
 	NULL
 };
 
-static void		invalid_operation(char *operation)
+static void		invalid_operation(char *operation, _Bool verbose)
 {
-	if (!(g_flags & FLAG_VERBOSE))
+	if (verbose == false)
 		return ;
 	ft_putstr_fd("invalid operation: ->", 2);
 	ft_putstr_fd(operation, 2);
 	ft_putstr_fd("<-\n\n", 2);
 }
 
-int				execute_instructions(t_list **a, t_list **b, char **instr)
+int				execute_instructions(t_list **a, t_list **b, char **instr,
+										_Bool verbose)
 {
 	int		i;
 
-	if (g_flags & FLAG_VERBOSE)
+	if (verbose)
 		ft_putchar('\n');
 	while (*instr)
 	{
@@ -67,13 +69,13 @@ int				execute_instructions(t_list **a, t_list **b, char **instr)
 			if (ft_strequ(*instr, g_instr[i]))
 			{
 				(*g_func[i])(a, b);
-				print_instr_res(a, b, *instr);
+				print_instr_res(a, b, *instr, verbose);
 				break ;
 			}
 			i++;
 		}
 		if (!g_instr[i])
-			invalid_operation(*instr);
+			invalid_operation(*instr, verbose);
 		instr++;
 	}
 	return (0);

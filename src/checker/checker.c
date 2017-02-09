@@ -15,21 +15,21 @@
 #include <push_swap.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-int		g_flags;
+#include <stdbool.h>
 
 int		main(int argc, char **argv)
 {
 	t_list	*a;
 	t_list	*b;
 	char	**instr;
+	_Bool	verbose;
 
-	g_flags = 0;
+	verbose = false;
 	a = NULL;
 	b = NULL;
-	if (add_arguments(argc, argv, &a)
-		|| get_instructions(&instr)
-		|| execute_instructions(&a, &b, instr))
+	if (add_arguments(argc, argv, &a, &verbose)
+		|| get_instructions(&instr, verbose)
+		|| execute_instructions(&a, &b, instr, verbose))
 	{
 		write(2, "Error\n", 6);
 		return (0);

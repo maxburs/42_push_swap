@@ -62,31 +62,16 @@ typedef struct				s_state
 	t_list	**instr;
 	t_list	**a;
 	t_list	**b;
+	_Bool	verbose;
 }							t_state;
 
-/*
-** used in merge sort
-*/
-typedef struct				s_meta
-{
-	int			sort_size;
-	int			total_size;
-	int			size_remaining;
-	int			chunk_left;
-	int			chunk_size;
-	_Bool		*reverse_map;
-	size_t		map_index;
-	_Bool		*bubble_map;
-	size_t		bubble_index;
-}							t_meta;
-
-extern int					g_flags;
 extern char const (*const	g_instr[]);
 extern int (*const			g_func[])(t_list **a, t_list **b);
 
 int							execute_instructions(t_list **a, t_list **b,
-								char **instr);
-int							get_instructions(char ***instr_return);
+								char **instr, _Bool verbose);
+int							get_instructions(char ***instr_return,
+								_Bool verbose);
 
 /*
 ** solve_check.c
@@ -97,7 +82,8 @@ int							stack_in_order(t_list *stack);
 /*
 ** add_arguments.c
 */
-int							add_arguments(int argc, char **argv, t_list **a);
+int							add_arguments(int argc, char **argv, t_list **a,
+								_Bool *verbose);
 
 /*
 ** free.c
@@ -123,12 +109,12 @@ int							exec_rrr(t_list **a, t_list **b);
 /*
 ** verbose.c (-v)
 */
-void						print_starting_stack(t_list *stack);
-void						print_instructions(char **instr);
-void						print_stacks(t_list *a, t_list *b);
+void						print_starting_stack(t_list *stack, _Bool verbose);
+void						print_instructions(char **instr, _Bool verbose);
+void						print_stacks(t_list *a, t_list *b, _Bool verbose);
 void						print_instr_res(t_list **a, t_list **b,
-								char const *instr);
-void						print_stack(t_list *stack);
+								char const *instr, _Bool verbose);
+void						print_stack(t_list *stack, _Bool verbose);
 
 /*
 ** solve/
@@ -145,7 +131,8 @@ int							nth_smallest(t_list *stack, int n);
 int							top_of_stack(t_state *state, int stack_type);
 int							next_in_stack(t_state *state, int stack_type);
 t_list						**stack_of_type(t_state *state, int stack_type);
-int							solve(t_list **instr, t_list **a, t_list **b);
+int							solve(t_list **instr, t_list **a,
+									t_list **b, _Bool verbose);
 
 /*
 ** state_manip.c
@@ -173,20 +160,6 @@ int							lst_fnd_sml(t_list *stack);
 int							lst_fnd_big(t_list *stack);
 t_list						*ft_lst_last(t_list *stack);
 int							lst_size(t_list *stack);
-
-/*
-** merge_sort/
-*/
-int							merge_sort(t_state *state);
-int							merge_chunks(t_state *state, t_meta *meta);
-void						print_meta(t_meta *meta);
-void						merge_bubble(t_state *state, t_meta *meta);
-int							merge_chunk_to_b(t_state *state, t_meta *meta);
-
-/*
-** double_bubble_sort/
-*/
-int							double_bubble_sort(t_state *state);
 
 /*
 ** insertion_sort/
