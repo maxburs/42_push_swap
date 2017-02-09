@@ -12,31 +12,31 @@
 
 #include <libft.h>
 #include <push_swap.h>
+#include <limits.h>
 
 #include <stdio.h>
 
 static int		parse_arg(char *arg, int *response)
 {
-	int		num;
-	int		is_neg;
+	int			num;
+	int			is_neg;
 
 	num = 0;
-	is_neg = 0;
+	is_neg = 1;
 	if (!arg)
 		return (1);
 	if (*arg == '-')
 	{
-		is_neg = 1;
+		is_neg = -1;
 		arg++;
 	}
 	while ('0' <= *arg && *arg <= '9')
 	{
 		num *= 10;
-		if (is_neg)
-			num -= *arg - '0';
-		else
-			num += *arg - '0';
+		num += is_neg * (*arg - '0');
 		arg++;
+		if ((is_neg == 1 && num < 0) || (is_neg == -1 && num > 0))
+			return (1);
 	}
 	if (*arg != '\0')
 		return (1);

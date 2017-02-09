@@ -13,6 +13,8 @@
 #include <libft.h>
 #include <push_swap.h>
 
+#include <limits.h>
+
 /*
 ** returns the int at the top of the stack in a linked list of ints
 */
@@ -56,13 +58,11 @@ int		solve(t_list **instr, t_list **a, t_list **b)
 {
 	t_state		state;
 
+			//printf("error at: %ld\n", (long)INT_MIN * -1);
 	state.instr = instr;
 	state.a = a;
 	state.b = b;
-	//if (lst_size(*a) < 50)
-	//	return (hybrid_sort(&state));
-	//else
-	//	return (merge_sort(&state));
-	//return (double_bubble_sort(&state));
+	if (lst_size(*a) < 13)
+		return (small_hybrid_sort(&state));
 	return (insertion_sort(&state));
 }
