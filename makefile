@@ -47,6 +47,7 @@ PUSH_SWAP_SRC = \
 			$(addprefix insertion_sort/, \
 				insertion_sort.c \
 				find_best_path.c \
+				how_to_insert.c \
 			) \
 			$(addprefix merge_sort/, \
 				merge_misc.c \
