@@ -14,9 +14,6 @@
 #include <push_swap.h>
 #include <limits.h>
 
-#include <stdio.h>
-
-
 void			print_path(t_path path)
 {
 	if (!(g_flags & FLAG_VERBOSE))
@@ -42,49 +39,14 @@ void			print_path(t_path path)
 	ft_putchar('\n');
 }
 
+/*
+** moves stack b into a reverse sorted position and then pushes it onto stack a
+*/
 
-int				insertion_sort(t_state *state)
+static void		finish(t_state *state)
 {
-	
 	int		end_path;
-	t_path	path;
 
-	while (*(state->a))
-	{
-		//if (stack_in_order(*(state->a)))
-		//{
-		//	if (g_flags & FLAG_VERBOSE)
-		//		ft_putstr("   --- stack 'a' in order, finalizing...\n\n");
-		//	break ;
-		//}
-		path = find_best_path(state);
-		if (g_flags & FLAG_VERBOSE)
-			ft_putstr("   --- path:\n");
-		print_path(path);
-		if (path.a_dir == path.b_dir)
-		{
-			while (path.a_len && path.b_len)
-			{
-				exec_instr(state, path.a_dir == FORWARD ? RR : RRR);
-				path.a_len--;
-				path.b_len--;
-			}
-		}
-		while (path.a_len)
-		{
-			exec_instr(state, path.a_dir == FORWARD ? RA : RRA);
-			path.a_len--;
-		}
-		while (path.b_len)
-		{
-			exec_instr(state, path.b_dir == FORWARD ? RB : RRB);
-			path.b_len--;
-		}
-
-		if (g_flags & FLAG_VERBOSE)
-			ft_putstr("   --- best path completed, pushing...\n\n");
-		exec_instr(state, PB);
-	}
 	end_path = path_to_end(state, STACK_B);
 	if (g_flags & FLAG_VERBOSE)
 	{
@@ -98,19 +60,50 @@ int				insertion_sort(t_state *state)
 		exec_n_instr(state, RRB, end_path * -1);
 	while (*(state->b))
 		exec_instr(state, PA);
+}
+
 /*
-	size_t front;
-	size_t back;
-
-	how_to_insert(*stack_of_type(state, STACK_A), 14, &front, &back);
-	printf("front: %zu\n", front);
-	printf("back: %zu\n", back);
-	//printf("path to end: %d\n", path_to_end(state, STACK_A));
-
-	exec_n_instr(state, PB, 9);
-
-	ft_putstr("   --- BEST PATH:\n");
-	print_path(find_best_path(state));
+** executes on a path
 */
+
+static void		exec_path(t_state *state, t_path path)
+{
+	if (g_flags & FLAG_VERBOSE)
+		ft_putstr("   --- path:\n");
+	print_path(path);
+	if (path.a_dir == path.b_dir)
+	{
+		while (path.a_len && path.b_len)
+		{
+			exec_instr(state, path.a_dir == FORWARD ? RR : RRR);
+			path.a_len--;
+			path.b_len--;
+		}
+	}
+	while (path.a_len)
+	{
+		exec_instr(state, path.a_dir == FORWARD ? RA : RRA);
+		path.a_len--;
+	}
+	while (path.b_len)
+	{
+		exec_instr(state, path.b_dir == FORWARD ? RB : RRB);
+		path.b_len--;
+	}
+}
+
+int				insertion_sort(t_state *state)
+{
+	t_path	path;
+
+	while (*(state->a))
+	{
+		path = find_best_path(state);
+		exec_path(state, path);
+		if (g_flags & FLAG_VERBOSE)
+			ft_putstr("   --- best path completed, pushing...\n\n");
+		exec_instr(state, PB);
+	}
+	finish(state);
 	return (0);
 }
