@@ -14,7 +14,24 @@
 #include <push_swap.h>
 #include <limits.h>
 
-#include <stdio.h>
+static int		lst_contains(t_list *list, int num)
+{
+	while (list)
+	{
+		if (*(int*)(list->content) == num)
+		{
+			if (g_flags	&& FLAG_VERBOSE)
+			{
+				ft_putstr("duplicate input: ");
+				ft_putnbr(num);
+				putchar('\n');
+			}
+			return (1);
+		}
+		list = list->next;
+	}
+	return (0);
+}
 
 static int		parse_arg(char *arg, int *response)
 {
@@ -57,7 +74,8 @@ static int		add_arg_array(t_list **stack, char *argv)
 	while (i)
 	{
 		i--;
-		if (parse_arg(split[i], &argument))
+		if (parse_arg(split[i], &argument)
+			|| lst_contains(*stack, argument))
 		{
 			free_instructions(&split);
 			return (1);
