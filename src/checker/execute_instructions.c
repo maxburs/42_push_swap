@@ -15,36 +15,6 @@
 #include <push_swap.h>
 #include <stdbool.h>
 
-char const *const	g_instr[] = {
-	"sa",
-	"sb",
-	"ss",
-	"pa",
-	"pb",
-	"ra",
-	"rb",
-	"rr",
-	"rra",
-	"rrb",
-	"rrr",
-	NULL
-};
-
-int (*const			g_func[])(t_list **a, t_list **b) = {
-	&exec_sa,
-	&exec_sb,
-	&exec_ss,
-	&exec_pa,
-	&exec_pb,
-	&exec_ra,
-	&exec_rb,
-	&exec_rr,
-	&exec_rra,
-	&exec_rrb,
-	&exec_rrr,
-	NULL
-};
-
 static void		invalid_operation(char *operation, _Bool verbose)
 {
 	if (verbose == false)
@@ -54,28 +24,28 @@ static void		invalid_operation(char *operation, _Bool verbose)
 	ft_putstr_fd("<-\n\n", 2);
 }
 
-int				execute_instructions(t_list **a, t_list **b, char **instr,
-										_Bool verbose)
+int				execute_instructions(t_state *state, t_list **a,
+											t_list **b, char **instr)
 {
 	int		i;
 
-	if (verbose)
+	if (state->verbose)
 		ft_putchar('\n');
 	while (*instr)
 	{
 		i = 0;
-		while (g_instr[i])
+		while (state->op[i])
 		{
-			if (ft_strequ(*instr, g_instr[i]))
+			if (ft_strequ(*instr, state->op[i]))
 			{
-				(*g_func[i])(a, b);
-				print_instr_res(a, b, *instr, verbose);
+				(*state->op_func[i])(a, b);
+				print_instr_res(a, b, *instr, state->verbose);
 				break ;
 			}
 			i++;
 		}
-		if (!g_instr[i])
-			invalid_operation(*instr, verbose);
+		if (!state->op[i])
+			invalid_operation(*instr, state->verbose);
 		instr++;
 	}
 	return (0);

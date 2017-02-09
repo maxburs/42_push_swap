@@ -59,17 +59,17 @@
 
 typedef struct				s_state
 {
-	t_list	**instr;
-	t_list	**a;
-	t_list	**b;
-	_Bool	verbose;
+	t_list		**instr;
+	t_list		**a;
+	t_list		**b;
+	_Bool		verbose;
+	int			(*op_func[12])(t_list **a, t_list **b);
+	char		*op[12];
 }							t_state;
 
-extern char const (*const	g_instr[]);
-extern int (*const			g_func[])(t_list **a, t_list **b);
-
-int							execute_instructions(t_list **a, t_list **b,
-								char **instr, _Bool verbose);
+int							execute_instructions(t_state *state, t_list **a,
+									t_list **b, char **instr);
+void						init_instr(t_state *state);
 int							get_instructions(char ***instr_return,
 								_Bool verbose);
 
@@ -131,8 +131,7 @@ int							nth_smallest(t_list *stack, int n);
 int							top_of_stack(t_state *state, int stack_type);
 int							next_in_stack(t_state *state, int stack_type);
 t_list						**stack_of_type(t_state *state, int stack_type);
-int							solve(t_list **instr, t_list **a,
-									t_list **b, _Bool verbose);
+int							solve(t_state *state);
 
 /*
 ** state_manip.c

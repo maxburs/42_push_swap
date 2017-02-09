@@ -54,15 +54,9 @@ t_list	**stack_of_type(t_state *state, int stack_type)
 	return (stack_type == STACK_A ? state->a : state->b);
 }
 
-int		solve(t_list **instr, t_list **a, t_list **b, _Bool verbose)
+int		solve(t_state *state)
 {
-	t_state		state;
-
-	state.instr = instr;
-	state.a = a;
-	state.b = b;
-	state.verbose = verbose;
-	if (lst_size(*a) < 13)
-		return (small_hybrid_sort(&state));
-	return (insertion_sort(&state));
+	if (lst_size(*(state->a)) < 13)
+		return (small_hybrid_sort(state));
+	return (insertion_sort(state));
 }

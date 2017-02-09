@@ -16,12 +16,12 @@
 #include <stdbool.h>
 #include <string.h>
 
-int		print_lst_instr(t_list *instr, _Bool verbose)
+static int		print_lst_instr(t_state *state, t_list *instr, _Bool verbose)
 {
 	while (instr)
 	{
 		if (instr->content)
-			ft_putstr(g_instr[*(int*)(instr->content)]);
+			ft_putstr(state->op[*(int*)(instr->content)]);
 		else
 		{
 			if (verbose)
@@ -34,20 +34,24 @@ int		print_lst_instr(t_list *instr, _Bool verbose)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	t_list	*instr;
-	t_list	*a;
-	t_list	*b;
-	_Bool	verbose;
+	t_list		*instr;
+	t_list		*a;
+	t_list		*b;
+	t_state		state;
 
-	verbose = false;
+	state.instr = &instr;
+	state.a = &a;
+	state.b = &b;
+	state.verbose = false;
 	instr = NULL;
 	a = NULL;
 	b = NULL;
-	if (add_arguments(argc, argv, &a, &verbose)
-		|| solve(&instr, &a, &b, verbose)
-		|| print_lst_instr(instr, verbose))
+	init_instr(&state);
+	if (add_arguments(argc, argv, &a, &state.verbose)
+		|| solve(&state)
+		|| print_lst_instr(&state, instr, state.verbose))
 	{
 		write(2, "Error\n", 6);
 		return (0);

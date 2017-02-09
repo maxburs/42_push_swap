@@ -12,16 +12,17 @@ CHECKER_SRC = \
 			free.c \
 			solve_check.c \
 			verbose.c \
+			$(addprefix instructions/, \
+				instr_sa_sb_ss.c \
+				instr_pa_pb.c \
+				instr_ra_rb_rr.c \
+				instr_rra_rrb_rrr.c \
+				init_instr.c \
+			) \
 		) \
 		$(addprefix checker/, \
 			checker.c \
 			get_instructions.c \
-		) \
-		$(addprefix instructions/, \
-			instr_sa_sb_ss.c \
-			instr_pa_pb.c \
-			instr_ra_rb_rr.c \
-			instr_rra_rrb_rrr.c \
 			execute_instructions.c \
 		) \
 	)
@@ -35,6 +36,13 @@ PUSH_SWAP_SRC = \
 			free.c \
 			solve_check.c \
 			verbose.c \
+			$(addprefix instructions/, \
+				instr_sa_sb_ss.c \
+				instr_pa_pb.c \
+				instr_ra_rb_rr.c \
+				instr_rra_rrb_rrr.c \
+				init_instr.c \
+			) \
 		) \
 		$(addprefix push_swap/, \
 			find_n_smallest.c \
@@ -49,13 +57,6 @@ PUSH_SWAP_SRC = \
 				find_best_path.c \
 				how_to_insert.c \
 			) \
-		) \
-		$(addprefix instructions/, \
-			instr_sa_sb_ss.c \
-			instr_pa_pb.c \
-			instr_ra_rb_rr.c \
-			instr_rra_rrb_rrr.c \
-			execute_instructions.c \
 		) \
 	)
 

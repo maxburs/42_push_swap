@@ -19,17 +19,19 @@
 
 int		main(int argc, char **argv)
 {
-	t_list	*a;
-	t_list	*b;
-	char	**instr;
-	_Bool	verbose;
+	char		**instr;
+	t_list		*a;
+	t_list		*b;
+	t_state		state;
 
-	verbose = false;
+	state.a = &a;
+	state.b = &b;
+	state.verbose = false;
 	a = NULL;
 	b = NULL;
-	if (add_arguments(argc, argv, &a, &verbose)
-		|| get_instructions(&instr, verbose)
-		|| execute_instructions(&a, &b, instr, verbose))
+	init_instr(&state);
+	if (add_arguments(argc, argv, &a, &state.verbose) || get_instructions(
+		&instr, state.verbose) || execute_instructions(&state, &a, &b, instr))
 	{
 		write(2, "Error\n", 6);
 		return (0);
