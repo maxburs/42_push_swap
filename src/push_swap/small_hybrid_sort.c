@@ -13,8 +13,6 @@
 #include <libft.h>
 #include <push_swap.h>
 
-#include <stdio.h>
-
 static int		pick_move_type(t_state *state, int stack_type)
 {
 	if (stack_type == STACK_A)

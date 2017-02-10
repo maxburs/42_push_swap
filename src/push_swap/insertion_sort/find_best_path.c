@@ -14,8 +14,6 @@
 #include <libft.h>
 #include <limits.h>
 
-#include <stdio.h>
-
 /*
 ** determines the number of comperations to compete a path
 */

@@ -25,7 +25,7 @@ static int		lst_contains(t_list *list, int num, _Bool verbose)
 			{
 				ft_putstr("duplicate input: ");
 				ft_putnbr(num);
-				putchar('\n');
+				ft_putchar('\n');
 			}
 			return (1);
 		}
@@ -76,7 +76,7 @@ static int		add_arg_array(t_list **stack, char *argv, _Bool *verbose)
 	{
 		i--;
 		if (parse_arg(split[i], &argument)
-			|| lst_contains(*stack, argument, verbose))
+			|| lst_contains(*stack, argument, *verbose))
 		{
 			free_instructions(&split);
 			return (1);
