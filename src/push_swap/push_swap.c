@@ -34,6 +34,14 @@ static int		print_lst_instr(t_state *state, t_list *instr, _Bool verbose)
 	return (0);
 }
 
+static void		init_state(t_state *state)
+{
+	*state->a = NULL;
+	*state->b = NULL;
+	state->verbose = false;
+	state->instr = NULL;
+}
+
 int				main(int argc, char **argv)
 {
 	t_list		*instr;
@@ -41,13 +49,12 @@ int				main(int argc, char **argv)
 	t_list		*b;
 	t_state		state;
 
+	if (argc == 1)
+		return (0);
 	state.instr = &instr;
 	state.a = &a;
 	state.b = &b;
-	state.verbose = false;
-	instr = NULL;
-	a = NULL;
-	b = NULL;
+	init_state(&state);
 	init_instr(&state);
 	if (add_arguments(argc, argv, &a, &state.verbose)
 		|| solve(&state)

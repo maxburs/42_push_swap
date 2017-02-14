@@ -17,18 +17,25 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int		main(int argc, char **argv)
+static void		init_state(t_state *state)
+{
+	*state->a = NULL;
+	*state->b = NULL;
+	state->verbose = false;
+}
+
+int				main(int argc, char **argv)
 {
 	char		**instr;
 	t_list		*a;
 	t_list		*b;
 	t_state		state;
 
+	if (argc == 1)
+		return (0);
 	state.a = &a;
 	state.b = &b;
-	state.verbose = false;
-	a = NULL;
-	b = NULL;
+	init_state(&state);
 	init_instr(&state);
 	if (add_arguments(argc, argv, &a, &state.verbose) || get_instructions(
 		&instr, state.verbose) || execute_instructions(&state, &a, &b, instr))
