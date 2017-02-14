@@ -45,7 +45,10 @@ int				execute_instructions(t_state *state, t_list **a,
 			i++;
 		}
 		if (!state->op[i])
+		{
 			invalid_operation(*instr, state->verbose);
+			return (1);
+		}
 		instr++;
 	}
 	return (0);
