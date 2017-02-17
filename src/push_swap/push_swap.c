@@ -39,7 +39,7 @@ static void		init_state(t_state *state)
 	*state->a = NULL;
 	*state->b = NULL;
 	state->verbose = false;
-	state->instr = NULL;
+	*state->instr = NULL;
 }
 
 int				main(int argc, char **argv)
