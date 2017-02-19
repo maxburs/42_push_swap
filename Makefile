@@ -89,9 +89,12 @@ $(PUSH_SWAP): $(LIBFT) $(PUSH_SWAP_OBJ)
 %.o: %.c
 	gcc $(CFLAGS) $(HEADERS) -c -o $@ $<
 
-$(LIBFT): $(LIBFT_DIR)**/*.c
+$(LIBFT): force
 	@echo building libft
 	cd ./libft && $(MAKE)
+
+force:
+	true
 
 clean:
 	rm -f $(CHECKER_OBJ) $(PUSH_SWAP_OBJ)
@@ -100,4 +103,4 @@ fclean: clean
 	rm -f $(CHECKER) $(PUSH_SWAP)
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
