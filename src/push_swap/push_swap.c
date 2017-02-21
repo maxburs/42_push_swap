@@ -49,8 +49,6 @@ int				main(int argc, char **argv)
 	t_list		*b;
 	t_state		state;
 
-	if (argc == 1)
-		return (0);
 	state.instr = &instr;
 	state.a = &a;
 	state.b = &b;
