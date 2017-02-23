@@ -80,10 +80,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(CHECKER) $(PUSH_SWAP)
 
-$(CHECKER): $(LIBFT) $(CHECKER_OBJ)
+$(CHECKER): $(CHECKER_OBJ) $(LIBFT)
 	gcc $(CFLAGS) -o $@ $^
 
-$(PUSH_SWAP): $(LIBFT) $(PUSH_SWAP_OBJ)
+$(PUSH_SWAP): $(PUSH_SWAP_OBJ) $(LIBFT)
 	gcc $(CFLAGS) -o $@ $^
 
 %.o: %.c
