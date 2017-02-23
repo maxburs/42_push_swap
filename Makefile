@@ -94,7 +94,7 @@ $(LIBFT): force
 	cd ./libft && $(MAKE)
 
 force:
-	true
+	@true
 
 clean:
 	rm -f $(CHECKER_OBJ) $(PUSH_SWAP_OBJ)

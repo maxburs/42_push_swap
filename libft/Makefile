@@ -146,4 +146,4 @@ fclean: clean
 	rm -f $(NAME)
 re: fclean all
 
-.PHONY: all clean fclean debug
+.PHONY: all clean fclean debug re
