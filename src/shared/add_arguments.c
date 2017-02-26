@@ -48,10 +48,11 @@ static int		parse_arg(char *arg, int *response)
 		is_neg = -1;
 		arg++;
 	}
+	if (*arg == '\0')
+		return (1);
 	while ('0' <= *arg && *arg <= '9')
 	{
-		num *= 10;
-		num += is_neg * (*arg - '0');
+		num = (10 * num) + is_neg * (*arg - '0');
 		arg++;
 		if ((is_neg == 1 && num < 0) || (is_neg == -1 && num > 0))
 			return (1);
