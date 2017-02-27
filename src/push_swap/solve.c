@@ -55,7 +55,7 @@ t_list	**stack_of_type(t_state *state, int stack_type)
 
 int		solve(t_state *state)
 {
-	if (lst_size(*(state->a)) < 13)
+	if (lst_size(*(state->a)) < 0)
 		return (small_hybrid_sort(state));
 	return (insertion_sort(state));
 }
