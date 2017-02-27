@@ -11,8 +11,14 @@ print_status () {
 }
 
 RANGE=$(seq "$1")
+PASSED=$3
 
-while true;
+if [ "$3" ]
+	then COUNT="$3"
+	else COUNT=1
+fi
+
+while [ "$COUNT" -gt 0 ];
 do
 	ARG=$(echo "$RANGE" | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle<STDIN>' | tr "\n" " ")
 	INSTR=$(./push_swap "$ARG")
@@ -25,8 +31,17 @@ do
 	fi
 	if [ "$LC" -gt $2 ]
 	then
-		print_status
-		break
+		let PASSED--
+		if ! [ "$3" ]
+		then
+			print_status
+			break
+		fi
 	fi
 	echo "$LC"
-done
+	if [ "$3" ]
+		then let COUNT--
+	fi
+done < <(true)
+
+echo "$PASSED/$3"
