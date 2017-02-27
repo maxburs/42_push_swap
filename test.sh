@@ -1,6 +1,11 @@
 #!/bin/bash
 
 
+
+RANGE=$(seq "$1")
+FAILED=0
+COUNT=0
+
 print_status () {
 	echo "list:"
 	echo "$ARG"
@@ -8,20 +13,12 @@ print_status () {
 	echo "$RES"
 	echo "line count:"
 	echo "$LC"
+	echo "failed on $COUNT"
 }
 
-RANGE=$(seq "$1")
-FAILED=0
-TOTAL=1
-COUNT=0
+trap 'echo; echo "$((COUNT-FAILED))"/"$COUNT"; exit' INT
 
-if [ "$3" ]
-	then TOTAL="$3"
-fi
-
-trap 'echo "$((COUNT-FAILED))"/"$COUNT"; exit' INT
-
-while [ $COUNT -lt $TOTAL ];
+while [ true ];
 do
 	ARG=$(echo "$RANGE" | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle<STDIN>' | tr "\n" " ")
 	INSTR=$(./push_swap "$ARG")
@@ -42,8 +39,9 @@ do
 		fi
 	fi
 	echo "$LC"
-	if [ "$3" ]
-		then let COUNT++
+	let COUNT++
+	if [ "$3" ] && [ $COUNT -ge $3 ]
+		then break
 	fi
 done < <(true)
 
