@@ -12,16 +12,16 @@ print_status () {
 
 while true;
 do
-	ARG=$(./range_gen.sh 13)
+	ARG=$(./range_gen.sh $1)
 	INSTR=$(./push_swap "$ARG")
 	RES=$(echo "$INSTR" | ./checker "$ARG")
-	LC=$(echo "$INSTR" | wc -l)
+	LC=$(echo "$INSTR" | wc -l | tr -d " ")
 	if [ "$RES" != "OK" ]
 	then
 		print_status
 		break
 	fi
-	if [ "$LC" -gt 5300 ]
+	if [ "$LC" -gt $2 ]
 	then
 		print_status
 		break
