@@ -18,6 +18,8 @@ if [ "$3" ]
 	else COUNT=1
 fi
 
+trap "$PASSED/$3; exit()" INT
+
 while [ "$COUNT" -gt 0 ];
 do
 	ARG=$(echo "$RANGE" | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle<STDIN>' | tr "\n" " ")
