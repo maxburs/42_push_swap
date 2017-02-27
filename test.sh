@@ -10,9 +10,11 @@ print_status () {
 	echo "$LC"
 }
 
+RANGE=$(seq "$1")
+
 while true;
 do
-	ARG=$(./range_gen.sh $1)
+	ARG=$(echo "$RANGE" | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle<STDIN>' | tr "\n" " ")
 	INSTR=$(./push_swap "$ARG")
 	RES=$(echo "$INSTR" | ./checker "$ARG")
 	LC=$(echo "$INSTR" | wc -l | tr -d " ")
@@ -27,5 +29,4 @@ do
 		break
 	fi
 	echo "$LC"
-	sleep 1
 done
