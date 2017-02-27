@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 RANGE=$(seq "$1")
 FAILED=0
 COUNT=0
