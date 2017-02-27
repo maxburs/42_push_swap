@@ -42,7 +42,7 @@ void			print_path(t_path path)
 ** moves stack b into a reverse sorted position and then pushes it onto stack a
 */
 
-static void		finish(t_state *state)
+static void		order_stack_b(t_state *state)
 {
 	int		end_path;
 
@@ -57,8 +57,6 @@ static void		finish(t_state *state)
 		exec_n_instr(state, RB, end_path);
 	else
 		exec_n_instr(state, RRB, end_path * -1);
-	while (*(state->b))
-		exec_instr(state, PA);
 }
 
 /*
@@ -93,18 +91,49 @@ static void		exec_path(t_state *state, t_path path)
 	}
 }
 
+static void		merge_stacks(t_state *state)
+{
+	int		left;
+
+	left = 3;
+	if (state->verbose)
+		ft_putstr("   --- merging stacks\n\n");
+	sort_3(state, STACK_A);
+	while (left && *(state->b))
+	{
+		if (last_in_stack(state, STACK_A) > top_of_stack(state, STACK_B))
+		{
+			exec_instr(state, RRA);
+			left--;
+		}
+		else
+			exec_instr(state, PA);
+	}
+	while (*(state->b))
+		exec_instr(state, PA);
+	while (left)
+	{
+		exec_instr(state, RRA);
+		left--;
+	}
+}
+
 int				insertion_sort(t_state *state)
 {
 	t_path	path;
+	int		size;
 
-	while (*(state->a))
+	size = lst_size(*stack_of_type(state, STACK_A));
+	while (size > 3)
 	{
 		path = find_best_path(state);
 		exec_path(state, path);
 		if (state->verbose)
 			ft_putstr("   --- best path completed, pushing...\n\n");
 		exec_instr(state, PB);
+		size--;
 	}
-	finish(state);
+	order_stack_b(state);
+	merge_stacks(state);
 	return (0);
 }
