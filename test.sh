@@ -11,16 +11,17 @@ print_status () {
 }
 
 RANGE=$(seq "$1")
-PASSED=$3
+FAILED=0
+TOTAL=1
+COUNT=0
 
 if [ "$3" ]
-	then COUNT="$3"
-	else COUNT=1
+	then TOTAL="$3"
 fi
 
-trap "$PASSED/$3; exit()" INT
+trap 'echo "$((COUNT-FAILED))"/"$COUNT"; exit' INT
 
-while [ "$COUNT" -gt 0 ];
+while [ $COUNT -lt $TOTAL ];
 do
 	ARG=$(echo "$RANGE" | tr " " "\n" | perl -MList::Util=shuffle -e 'print shuffle<STDIN>' | tr "\n" " ")
 	INSTR=$(./push_swap "$ARG")
@@ -33,7 +34,7 @@ do
 	fi
 	if [ "$LC" -gt $2 ]
 	then
-		let PASSED--
+		let FAILED++
 		if ! [ "$3" ]
 		then
 			print_status
@@ -42,8 +43,10 @@ do
 	fi
 	echo "$LC"
 	if [ "$3" ]
-		then let COUNT--
+		then let COUNT++
 	fi
 done < <(true)
 
-echo "$PASSED/$3"
+if [ "$3" ]
+	then echo "$((COUNT-FAILED))"/"$COUNT"
+fi
