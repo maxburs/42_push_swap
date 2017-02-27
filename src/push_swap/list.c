@@ -40,7 +40,7 @@ int				lst_is_order(t_list *stack, int smallest)
 			found_smallest = 1;
 		stack = stack->next;
 	}
-	if (first < last)
+	if (first < last && first != smallest)
 		return (0);
 	return (1);
 }

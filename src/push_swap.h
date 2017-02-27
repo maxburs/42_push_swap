@@ -72,6 +72,7 @@ int							execute_instructions(t_state *state, t_list **a,
 void						init_instr(t_state *state);
 int							get_instructions(char ***instr_return,
 								_Bool verbose);
+void						sort_3(t_state *state, int stack_type);
 
 /*
 ** solve_check.c

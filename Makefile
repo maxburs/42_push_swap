@@ -62,6 +62,7 @@ PUSH_SWAP_SRC = \
 			list.c \
 			push_swap.c \
 			solve.c \
+			sort_3.c \
 			state_manip.c \
 			state_search.c \
 			$(addprefix insertion_sort/, \

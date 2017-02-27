@@ -65,7 +65,10 @@ static int		goto_smallest_bubble(t_state *state, int stack_type)
 
 int				small_hybrid_sort(t_state *state)
 {
-	while (*(state->a))
+	int		size;
+
+	size = lst_size(*(state->a));
+	while (size > 3)
 	{
 		goto_smallest_bubble(state, STACK_A);
 		if (stack_in_order(*(state->a)))
@@ -75,7 +78,9 @@ int				small_hybrid_sort(t_state *state)
 			break ;
 		}
 		exec_instr(state, PB);
+		size--;
 	}
+	sort_3(state, STACK_A);
 	while (*(state->b))
 		exec_instr(state, PA);
 	return (0);
