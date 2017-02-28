@@ -1,0 +1,8 @@
+{
+	"files.associations": {},
+	"files.exclude": {
+		"**/*.o": true,
+		"**/*.a": true
+		".vscode": true
+	}
+}

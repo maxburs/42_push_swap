@@ -3,6 +3,5 @@
 *.a
 *.out
 .nfs.*
-checker
-push_swap
-.vscode/
+./checker
+./push_swap
