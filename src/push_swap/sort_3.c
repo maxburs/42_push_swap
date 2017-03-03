@@ -17,12 +17,10 @@ void						sort_3(t_state *state, int stack_type)
 {
 	t_list	*stack;
 	int		smallest;
-	int		biggest;
 
 	if (state->verbose)
 		ft_putstr("\n   --- sort 3 start\n\n");
 	smallest = find_smallest(state, stack_type);
-	biggest = find_biggest(state, stack_type);
 	stack = *stack_of_type(state, stack_type);
 	if (!lst_is_order(stack, smallest))
 	{
