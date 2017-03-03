@@ -120,9 +120,6 @@ void						print_stack(t_list *stack, _Bool verbose);
 /*
 ** solve/
 */
-int							small_hybrid_sort(t_state *state);
-_Bool						*build_order_map(size_t size);
-
 t_list						*find_n_smallest(t_list *stack, int n);
 int							nth_smallest(t_list *stack, int n);
 
@@ -139,9 +136,6 @@ int							solve(t_state *state);
 */
 int							exec_instr(t_state *state, int instr);
 int							exec_n_instr(t_state *state, int instr, int n);
-int							try_bubble(t_state *state, int stack_type);
-int							try_rbubble(t_state *state, int stack_type,
-								int reverse);
 
 /*
 ** state_search.c

@@ -95,10 +95,9 @@ static void		merge_stacks(t_state *state)
 {
 	int		left;
 
-	left = 3;
+	left = lst_size(*stack_of_type(state, STACK_A));
 	if (state->verbose)
 		ft_putstr("   --- merging stacks\n\n");
-	sort_3(state, STACK_A);
 	while (left && *(state->b))
 	{
 		if (last_in_stack(state, STACK_A) > top_of_stack(state, STACK_B))
@@ -134,6 +133,13 @@ int				insertion_sort(t_state *state)
 		size--;
 	}
 	order_stack_b(state);
-	merge_stacks(state);
+	size = lst_size(*stack_of_type(state, STACK_A));
+	if (size == 3)
+		sort_3(state, STACK_A);
+	else if (size == 2
+		&& next_in_stack(state, STACK_A) < top_of_stack(state, STACK_A))
+		exec_instr(state, SA);
+	if (*stack_of_type(state, STACK_B))
+		merge_stacks(state);
 	return (0);
 }

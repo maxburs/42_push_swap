@@ -58,7 +58,6 @@ PUSH_SWAP_SRC = \
 		) \
 		$(addprefix push_swap/, \
 			find_n_smallest.c \
-			small_hybrid_sort.c \
 			list.c \
 			push_swap.c \
 			solve.c \
