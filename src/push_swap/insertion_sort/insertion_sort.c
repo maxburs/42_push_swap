@@ -38,10 +38,6 @@ void			print_path(t_path path)
 	ft_putchar('\n');
 }
 
-/*
-** moves stack b into a reverse sorted position and then pushes it onto stack a
-*/
-
 static void		order_stack(t_state *state, int stack_type, int reverse)
 {
 	int		end_path;
