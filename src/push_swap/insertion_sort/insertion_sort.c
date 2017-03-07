@@ -42,21 +42,27 @@ void			print_path(t_path path)
 ** moves stack b into a reverse sorted position and then pushes it onto stack a
 */
 
-static void		order_stack_b(t_state *state)
+static void		order_stack(t_state *state, int stack_type, int reverse)
 {
 	int		end_path;
 
-	end_path = path_to_end(state, STACK_B);
+	if (reverse)
+		end_path = path_to_end(state, stack_type);
+	else
+		end_path = path_to_smallest(state, stack_type);
 	if (state->verbose)
 	{
-		ft_putstr("   --- end path: ");
+		if (stack_type == STACK_A)
+			ft_putstr("   --- stack a end path: ");
+		else if (stack_type == STACK_B)
+			ft_putstr("   --- stack b end path: ");
 		ft_putnbr(end_path);
 		ft_putchar('\n');
 	}
 	if (end_path > 0)
-		exec_n_instr(state, RB, end_path);
+		exec_n_instr(state, stack_type == STACK_A ? RA : RB, end_path);
 	else
-		exec_n_instr(state, RRB, end_path * -1);
+		exec_n_instr(state, stack_type == STACK_A ? RRA : RRB, end_path * -1);
 }
 
 /*
@@ -123,7 +129,7 @@ int				insertion_sort(t_state *state)
 	int		size;
 
 	size = lst_size(*stack_of_type(state, STACK_A));
-	while (size > 3)
+	while (size > 3 && !(lst_is_order(*(state->a), lst_fnd_sml(*(state->a)))))
 	{
 		path = find_best_path(state);
 		exec_path(state, path);
@@ -132,9 +138,11 @@ int				insertion_sort(t_state *state)
 		exec_instr(state, PB);
 		size--;
 	}
-	order_stack_b(state);
+	order_stack(state, STACK_B, true);
 	size = lst_size(*stack_of_type(state, STACK_A));
-	if (size == 3)
+	if (size > 3)
+		order_stack(state, STACK_A, false);
+	else if (size == 3)
 		sort_3(state, STACK_A);
 	else if (size == 2
 		&& next_in_stack(state, STACK_A) < top_of_stack(state, STACK_A))

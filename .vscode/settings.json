@@ -2,7 +2,8 @@
 	"files.associations": {},
 	"files.exclude": {
 		"**/*.o": true,
-		"**/*.a": true
+		"**/*.a": true,
 		".vscode": true
-	}
+	},
+    "editor.rulers": [80]
 }

@@ -22,8 +22,10 @@ do
 	INSTR=$(./push_swap "$ARG")
 	RES=$(echo "$INSTR" | ./checker "$ARG")
 	LC=$(echo "$INSTR" | wc -l | tr -d " ")
+	let COUNT++
 	if [ "$RES" != "OK" ]
 	then
+		let FAILED++
 		print_status
 		break
 	fi
@@ -37,7 +39,6 @@ do
 		fi
 	fi
 	echo "$LC"
-	let COUNT++
 	if [ "$3" ] && [ $COUNT -ge $3 ]
 		then break
 	fi
