@@ -101,7 +101,7 @@ static void		merge_stacks(t_state *state)
 {
 	int		left;
 
-	left = lst_size(*stack_of_type(state, STACK_A));
+	left = lst_size(*(state->a));
 	if (state->verbose)
 		ft_putstr("   --- merging stacks\n\n");
 	while (left && *(state->b))
@@ -128,7 +128,7 @@ int				insertion_sort(t_state *state)
 	t_path	path;
 	int		size;
 
-	size = lst_size(*stack_of_type(state, STACK_A));
+	size = lst_size(*(state->a));
 	while (size > 3 && !(lst_is_order(*(state->a), lst_fnd_sml(*(state->a)))))
 	{
 		path = find_best_path(state);
@@ -139,7 +139,7 @@ int				insertion_sort(t_state *state)
 		size--;
 	}
 	order_stack(state, STACK_B, true);
-	size = lst_size(*stack_of_type(state, STACK_A));
+	size = lst_size(*(state->a));
 	if (size > 3)
 		order_stack(state, STACK_A, false);
 	else if (size == 3)
@@ -147,7 +147,7 @@ int				insertion_sort(t_state *state)
 	else if (size == 2
 		&& next_in_stack(state, STACK_A) < top_of_stack(state, STACK_A))
 		exec_instr(state, SA);
-	if (*stack_of_type(state, STACK_B))
+	if (*(state->b))
 		merge_stacks(state);
 	return (0);
 }

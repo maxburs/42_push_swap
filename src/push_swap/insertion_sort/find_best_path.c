@@ -77,13 +77,13 @@ t_path				find_best_path(t_state *state)
 	t_paths_meta	meta;
 	t_list			*stack_a;
 
-	stack_a = *stack_of_type(state, STACK_A);
+	stack_a = *(state->a);
 	meta.best_op_time = INT_MAX;
 	meta.a_forward = 0;
-	meta.a_backward = lst_size(*stack_of_type(state, STACK_A));
+	meta.a_backward = lst_size(*(state->a));
 	while (stack_a)
 	{
-		how_to_insert(*stack_of_type(state, STACK_B), *(int*)(stack_a->content),
+		how_to_insert(*(state->b), *(int*)(stack_a->content),
 							&meta.b_forward, &meta.b_backward);
 		try_path_combinations(&meta);
 		stack_a = stack_a->next;
