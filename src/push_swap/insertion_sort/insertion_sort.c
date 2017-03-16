@@ -43,7 +43,7 @@ static void		order_stack(t_state *state, int stack_type, int reverse)
 	int		end_path;
 
 	if (reverse)
-		end_path = path_to_end(state, stack_type);
+		end_path = path_to_biggest(state, stack_type);
 	else
 		end_path = path_to_smallest(state, stack_type);
 	if (state->verbose)

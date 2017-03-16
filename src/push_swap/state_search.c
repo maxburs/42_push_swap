@@ -49,27 +49,30 @@ int			path_to_smallest(t_state *state, int stack_type)
 }
 
 /*
-** finds path to finish a stack in reverse order
+** returns the number of rotate to get to the biggest int
+** returns negative if its faster to rotate backwards
 */
 
-int			path_to_end(t_state *state, int stack_type)
+int			path_to_biggest(t_state *state, int stack_type)
 {
 	t_list	*stack;
 	int		front;
 	int		back;
-	int		diff;
+	int		biggest;
 
-	if (!(stack = *stack_of_type(state, stack_type)))
-		return (0);
+	stack = *stack_of_type(state, stack_type);
 	front = 0;
 	back = 0;
-	diff = last_in_stack(state, stack_type) - *(int*)(stack->content);
-	while (stack->next)
+	if (!stack)
+		return (0);
+	biggest = *(int*)(stack->content);
+	stack = stack->next;
+	while (stack)
 	{
 		back++;
-		if (*(int*)(stack->content) - *(int*)((stack->next)->content) < diff)
+		if (*(int*)(stack->content) > biggest)
 		{
-			diff = *(int*)(stack->content) - *(int*)((stack->next)->content);
+			biggest = *(int*)(stack->content);
 			front += back;
 			back = 0;
 		}

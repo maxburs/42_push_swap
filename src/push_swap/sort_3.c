@@ -19,7 +19,12 @@ void						sort_3(t_state *state, int stack_type)
 	int		smallest;
 
 	if (state->verbose)
-		ft_putstr("\n   --- sort 3 start\n\n");
+	{
+		if (stack_type == STACK_A)
+			ft_putstr("\n   --- sort 3 start, stack A\n\n");
+		else
+			ft_putstr("\n   --- sort 3 start, stack B\n\n");
+	}
 	smallest = find_smallest(state, stack_type);
 	stack = *stack_of_type(state, stack_type);
 	if (!lst_is_order(stack, smallest))
