@@ -3,5 +3,6 @@
 *.a
 *.out
 .nfs.*
+.DS_Store
 /checker
 /push_swap
