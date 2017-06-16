@@ -4,6 +4,12 @@ RANGE=$(seq "$1")
 FAILED=0
 COUNT=0
 
+if ! [ "$2" ]
+then
+	echo './test.sh [integer count] [max operations] [optional: number of tests]'
+	exit
+fi
+
 print_status () {
 	echo "list:"
 	echo "$ARG"
